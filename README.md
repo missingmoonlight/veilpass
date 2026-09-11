@@ -8,7 +8,7 @@
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://missingmoonlight.github.io/veilpass) · [Compact Contracts](./contracts/) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
+[Live Demo](https://veilpass-omega.vercel.app/) · [Compact Contracts](./contracts/) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
 
 </div>
 
