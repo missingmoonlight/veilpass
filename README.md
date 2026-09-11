@@ -8,7 +8,7 @@
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://veilpass.lovable.app) · [Compact Contracts](./contracts/) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
+[Live Demo](https://missingmoonlight.github.io/veilpass) · [Compact Contracts](./contracts/) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
 
 </div>
 
@@ -252,12 +252,12 @@ veilpass/
 ## Submission Checklist
 
 - [x] Fully functional dApp using Midnight's privacy model (Age / Eligibility Gate)
-- [x] Minimum 3 tests passing (23 tests across 2 suites)
+- [x] Minimum 3 tests passing (28 tests across 2 suites)
 - [x] CI/CD pipeline (`.github/workflows/ci.yml`)
 - [x] Approved idea: **Age / Eligibility Gate**
 - [x] Minimum 10 meaningful commits
 - [x] Public GitHub repository with complete README
-- [x] Live demo link: [veilpass.lovable.app](https://veilpass.lovable.app)
+- [x] Live demo link: [missingmoonlight.github.io/veilpass](https://missingmoonlight.github.io/veilpass)
 - [x] Privacy model section (see above)
 - [x] Real wallet integration via `@midnight-ntwrk/dapp-connector-api`
 

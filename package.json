@@ -1,5 +1,5 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "veilpass",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -94,6 +94,7 @@
     "vitest": "^5.0.0"
   },
   "optionalDependencies": {
-    "@esbuild/linux-x64": "^0.28.2"
+    "@esbuild/linux-x64": "^0.28.2",
+    "@rolldown/binding-win32-x64-msvc": "^1.2.8"
   }
 }
