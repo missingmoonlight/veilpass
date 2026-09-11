@@ -58,7 +58,7 @@ export const CURRENT_YEAR = new Date().getFullYear();
 
 /** Midnight Preprod network configuration. */
 export const NETWORK_CONFIG = {
-  networkId: "undeployed" as const,
+  networkId: "preprod" as const,
   indexerUri: "https://indexer.testnet-02.midnight.network/api/v1/graphql",
   nodeUri: "https://rpc.testnet-02.midnight.network",
   proofServerUri: "http://localhost:6300",

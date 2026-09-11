@@ -57,7 +57,7 @@ declare global {
   }
 }
 
-export const NETWORK_ID: NetworkId = (import.meta.env?.["VITE_NETWORK_ID"] as NetworkId) ?? "undeployed";
+export const NETWORK_ID: NetworkId = (import.meta.env?.["VITE_NETWORK_ID"] as NetworkId) ?? "preprod";
 
 // ─── Wallet Detection ─────────────────────────────────────────────────────────
 

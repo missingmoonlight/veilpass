@@ -217,7 +217,7 @@ function Index() {
             </div>
             <span className="text-lg font-semibold">VeilPass</span>
             <span className="hidden rounded-sm border border-border bg-secondary px-2 py-0.5 font-mono text-[10px] uppercase text-muted-foreground sm:inline">
-              Midnight Devnet
+              Midnight Preprod
             </span>
           </div>
 
