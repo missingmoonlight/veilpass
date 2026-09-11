@@ -18,13 +18,29 @@
 
 ## What is VeilPass?
 
-VeilPass is a **fully functional Age / Eligibility Gate dApp** built on [Midnight Network](https://midnight.network). It uses **zero-knowledge proofs** via Midnight's Compact smart contract language to let a user prove they are 18 or older — without ever revealing their birth year.
-
-**Selected idea from the approved list:** *Age / Eligibility Gate — prove a threshold without revealing the underlying value.*
+### Product Proposal & Selected Idea
+- **Track**: **Age / Eligibility Gate** *(from the official Midnight Idea List: "prove a threshold without revealing the underlying value")*
+- **Problem**: Age verification online conventionally forces users to disclose sensitive personal identifiable information (PII) — full birth dates, government ID scans, or biometric data — exposing them to identity theft and centralized data breaches.
+- **Solution**: VeilPass implements a zero-knowledge credential flow where the user proves they satisfy an age gate (`age >= minAge`) using local zero-knowledge proof generation. The actual birth year is consumed purely as an in-memory private witness and is never transmitted.
 
 ---
 
 ## Privacy Model
+
+### Public State vs. Private Witnesses
+
+Midnight smart contracts partition application state into **public ledger state** (globally visible and verified by consensus) and **private witnesses** (held strictly on the client/wallet and discarded after local proof generation):
+
+| Component | Storage Location | Visibility | Purpose |
+|---|---|---|---|
+| **`localBirthYear`** | Local Wallet / Client | 🔒 **Private Witness** | Private input supplying the user's birth year. Evaluated inside the ZK circuit; never broadcast. |
+| **`localSecretKey`** | Local Wallet / Client | 🔒 **Private Witness** | Random session entropy ensuring nullifiers cannot be brute-forced or linked across dApps. |
+| **`minAge`** | On-Chain Ledger | 🌐 **Public Ledger State** | Configured age threshold (e.g. `18`). |
+| **`referenceYear`** | On-Chain Ledger | 🌐 **Public Ledger State** | Contract reference epoch (e.g. `2026`) against which age is computed. |
+| **`usedNullifiers`** | On-Chain Ledger | 🌐 **Public Ledger State** | Set of consumed 32-byte cryptographic hashes preventing replay attacks. |
+| **`verifiedCount`** | On-Chain Ledger | 🌐 **Public Ledger State** | Verifiable public tally of total successful gate passes. |
+
+### What an Observer Can and Cannot Learn
 
 > **What an observer CAN learn:**
 > - That *some* user passed the 18+ check (a nullifier was recorded)
@@ -38,18 +54,17 @@ VeilPass is a **fully functional Age / Eligibility Gate dApp** built on [Midnigh
 > - Whether two different proofs belong to the same person (nullifiers are derived from a per-session secret key, not from identity)
 > - Any relationship between the nullifier and the birth year
 
-### How it works
+### Zero-Knowledge Dataflow
 
 ```
-User's device                    Compact Circuit (on-chain)
-─────────────────               ────────────────────────────
-birthYear ─────┐                assert age >= minAge
-secretKey ─────┤  ZK Proof  →   insert nullifier into usedNullifiers
-               └─ (private)     increment verifiedCount
-                                ← proof valid / invalid
+User's device (Local Wallet)       Compact Circuit (Midnight Ledger)
+────────────────────────────       ─────────────────────────────────
+localBirthYear ──┐                 assert (referenceYear - birthYear) >= minAge
+localSecretKey ──┤  ZK Proof  →   assert !usedNullifiers.member(nullifier)
+                 └─ (private)      insert nullifier into usedNullifiers
+                                   increment verifiedCount
+                                   ← Status: VALID / REJECTED
 ```
-
-The `birthYear` and `secretKey` are **private witnesses** — they are supplied by the user's wallet, used inside the Compact circuit's proof system, and **never transmitted to the node, indexer, or any other party**.
 
 ---
 
@@ -140,7 +155,7 @@ npm run test
 bun test
 ```
 
-Expected output: **23 tests passing** across 2 test suites.
+Expected output: **28 tests passing** across 2 test suites.
 
 ### Building for Production
 
