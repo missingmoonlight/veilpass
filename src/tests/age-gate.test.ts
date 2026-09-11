@@ -211,8 +211,8 @@ describe("Wallet detection & connection", () => {
     expect(state.isConnected).toBe(true);
     expect(state.type).toBe("sandbox");
     expect(state.address).toMatch(/^mn1addr/);
-    const walletState = await api.state();
-    expect(walletState.address).toBe(state.address);
+    const walletState = await api.state?.();
+    expect(walletState?.address).toBe(state.address);
   });
 });
 
