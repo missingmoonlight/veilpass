@@ -15,9 +15,6 @@
     "test:coverage": "vitest run --coverage",
     "deploy": "npx tsx scripts/deploy.ts"
   },
-  "overrides": {
-    "rolldown": "1.2.1"
-  },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@midnight-ntwrk/dapp-connector-api": "^4.0.1",

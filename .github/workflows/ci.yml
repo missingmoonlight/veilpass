@@ -11,85 +11,75 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # ── Lint & Type Check ───────────────────────────────────────────────────────
-  lint:
-    name: Lint & Type Check
+  # ── 1. Type Check & Validation ──────────────────────────────────────────────
+  typecheck:
+    name: TypeScript Type Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 22
+          cache: "npm"
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm install
 
-      - name: Lint
-        run: bun run lint
-        continue-on-error: true
+      - name: Type check (tsc)
+        run: npx tsc --noEmit
 
-      - name: Type check
-        run: bunx tsc --noEmit
-        continue-on-error: true
-
-  # ── Tests ───────────────────────────────────────────────────────────────────
+  # ── 2. Test Suite Execution ─────────────────────────────────────────────────
   test:
-    name: Tests
+    name: Vitest Test Suite (28 Tests)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 22
+          cache: "npm"
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm install
 
-      - name: Run tests
-        run: bun run test --reporter=verbose
+      - name: Run test suite
+        run: npx vitest run --reporter=verbose
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-report
-          path: coverage/
-          retention-days: 7
-
-  # ── Build ───────────────────────────────────────────────────────────────────
+  # ── 3. Production Build ─────────────────────────────────────────────────────
   build:
     name: Production Build
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [typecheck, test]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 22
+          cache: "npm"
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm install
 
-      - name: Build
-        run: bun run build
+      - name: Build application
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: dist/
+          name: dist-output
+          path: .output/
           retention-days: 3
 
-  # ── Verify Contracts ────────────────────────────────────────────────────────
+  # ── 4. Verify Compact Smart Contracts ───────────────────────────────────────
   contracts:
     name: Compact Contract Verification
     runs-on: ubuntu-latest
@@ -104,15 +94,14 @@ jobs:
           test -f contracts/AgeGate.compact && echo "✅ AgeGate.compact found"
           test -f contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact found"
           test -f contracts/managed-api.ts && echo "✅ managed-api.ts found"
+          test -f contracts/deployment.json && echo "✅ deployment.json found"
           echo "Contract verification complete."
 
-      - name: Validate Compact syntax (static check)
+      - name: Validate Compact syntax and exports
         run: |
           echo "Validating Compact contract syntax..."
-          # Check pragma is present
           grep -q "pragma language_version >= 0.23" contracts/AgeGate.compact && echo "✅ AgeGate.compact: pragma OK"
           grep -q "pragma language_version >= 0.23" contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact: pragma OK"
-          # Check for required exports
           grep -q "export circuit proveAge" contracts/AgeGate.compact && echo "✅ AgeGate.compact: proveAge circuit OK"
           grep -q "export circuit castVote" contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact: castVote circuit OK"
           echo "All contract validations passed."

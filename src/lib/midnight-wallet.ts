@@ -75,7 +75,7 @@ export function getLaceWallet(): MidnightWalletAPI | null {
 
 // ─── Connection ───────────────────────────────────────────────────────────────
 
-const NETWORK_ID: NetworkId = (import.meta.env?.VITE_NETWORK_ID as NetworkId) ?? "undeployed";
+const NETWORK_ID: NetworkId = (import.meta.env?.["VITE_NETWORK_ID"] as NetworkId) ?? "undeployed";
 
 /**
  * Connects to the Midnight Lace wallet.

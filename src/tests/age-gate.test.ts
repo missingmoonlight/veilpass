@@ -128,7 +128,7 @@ describe("Ledger state management", () => {
       get length() { return Object.keys(store).length; },
     };
     // Assign to both global and globalThis for Node compat
-    (globalThis as unknown as Record<string, unknown>).localStorage = mock;
+    (globalThis as unknown as Record<string, unknown>)["localStorage"] = mock;
   });
 
   it("starts with a verified count of 0", () => {

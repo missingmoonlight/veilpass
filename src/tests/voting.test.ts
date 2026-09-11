@@ -141,7 +141,9 @@ describe("PrivateVoting — vote casting", () => {
     const nullifiers = await Promise.all(voters.map(computeVoterNullifier));
 
     for (let i = 0; i < nullifiers.length; i++) {
-      const result = castVote(poll, nullifiers[i], i % 3);
+      const nul = nullifiers[i];
+      if (!nul) continue;
+      const result = castVote(poll, nul, i % 3);
       expect(result.success).toBe(true);
     }
 
@@ -173,8 +175,10 @@ describe("PrivateVoting — privacy invariants", () => {
     const voters = [generateVoterKey(), generateVoterKey()];
     const nullifiers = await Promise.all(voters.map(computeVoterNullifier));
 
-    castVote(poll, nullifiers[0], 0);
-    castVote(poll, nullifiers[1], 1);
+    if (nullifiers[0] && nullifiers[1]) {
+      castVote(poll, nullifiers[0], 0);
+      castVote(poll, nullifiers[1], 1);
+    }
 
     // Total is public
     expect(poll.totalVotes).toBe(2);
