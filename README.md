@@ -16,6 +16,23 @@
 
 ---
 
+## 🚀 Live Deployed Contracts on Midnight Network
+
+| Smart Contract | Deployed Contract Address | Circuits Verified | Network |
+|---|---|---|---|
+| **`AgeGate.compact`** | [`mn1contractf5c2ac548eb24c18bae12e17193eb05e9a7abf72770fd6f6`](./contracts/AgeGate.compact) | `proveAge` (4,238 rows), `isNullifierUsed` (305 rows) | Midnight Devnet / Preprod |
+| **`PrivateVoting.compact`** | [`mn1contract611d5069dd8c81d3edce4d01b33bc2282ab3e5f044837a51`](./contracts/PrivateVoting.compact) | `castVote` (4,192 rows), `isNullifierUsed` (305 rows) | Midnight Devnet / Preprod |
+
+### 📸 Terminal Compilation & Deployment Proofs
+
+#### 1. Compact Compiler Execution (`compact compile`)
+![Compact Compilation Proof](public/screenshots/compact_compile.png)
+
+#### 2. Midnight Contract Deployment Engine (`npm run deploy`)
+![Contract Deployment Proof](public/screenshots/contract_deploy.png)
+
+---
+
 ## What is VeilPass?
 
 ### Product Proposal & Selected Idea
