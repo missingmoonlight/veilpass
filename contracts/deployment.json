@@ -1,0 +1,17 @@
+{
+  "network": "midnight-preprod",
+  "deployedAt": "2026-09-11T15:22:12.906Z",
+  "contracts": {
+    "AgeGate": {
+      "address": "mn1contracte09f340d003cb328b51c311cdf541d2dd3393f5f00cc2848",
+      "transactionHash": "96444f9163f8968735c89ccdcd481d642399f8bd734af2ade114f9dd35ec5661",
+      "referenceYear": 2026,
+      "minAge": 18
+    },
+    "PrivateVoting": {
+      "address": "mn1contractd32b80da297eb1f4c82208a9b574036bc4ce1a1d8cc66756",
+      "transactionHash": "cbc82058bea20e97524fc1b08966ab3290e6875168a3c0ae85a79f709f5eb48d",
+      "optionCount": 4
+    }
+  }
+}
