@@ -29,6 +29,9 @@
 #### 2. Midnight Contract Deployment Engine (`npm run deploy`)
 ![Contract Deployment Proof](public/screenshots/contract_deploy.png)
 
+#### 3. Automated Test Suite (29 Tests Passing)
+![Test Output Proof](public/screenshots/tests_output.png)
+
 ---
 
 ## What is VeilPass?
