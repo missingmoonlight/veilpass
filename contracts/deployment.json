@@ -1,16 +1,16 @@
 {
   "network": "midnight-preprod",
-  "deployedAt": "2026-09-11T15:22:12.906Z",
+  "deployedAt": "2026-09-11T15:28:42.450Z",
   "contracts": {
     "AgeGate": {
-      "address": "mn1contracte09f340d003cb328b51c311cdf541d2dd3393f5f00cc2848",
-      "transactionHash": "96444f9163f8968735c89ccdcd481d642399f8bd734af2ade114f9dd35ec5661",
+      "address": "mn1contractf5c2ac548eb24c18bae12e17193eb05e9a7abf72770fd6f6",
+      "transactionHash": "fbff816522763b46cb2a382a5030e4e095d8d6ca5c3d1fa5144fb266f0e3ee9c",
       "referenceYear": 2026,
       "minAge": 18
     },
     "PrivateVoting": {
-      "address": "mn1contractd32b80da297eb1f4c82208a9b574036bc4ce1a1d8cc66756",
-      "transactionHash": "cbc82058bea20e97524fc1b08966ab3290e6875168a3c0ae85a79f709f5eb48d",
+      "address": "mn1contract611d5069dd8c81d3edce4d01b33bc2282ab3e5f044837a51",
+      "transactionHash": "b0f673e1887ae20cf82de5a3b863076a4a51aae46a64b6b31fcc2c9e8d4dd3a0",
       "optionCount": 4
     }
   }
