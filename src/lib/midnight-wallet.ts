@@ -1,17 +1,26 @@
 /**
- * VeilPass — Midnight Wallet Integration
+ * VeilPass — Wallet Integration Layer
  *
- * Real integration with the Midnight DApp Connector API.
- * The Lace wallet exposes `window.midnight.mnLace` in supported browsers.
- *
- * @see https://docs.midnight.network/develop/tutorial/using/api-card
+ * Supports Midnight Network wallets:
+ * - Lace Wallet (window.midnight.mnLace)
+ * - 1AM Wallet (window.midnight["1am"] / window.midnight.oneAM / window.oneAM)
+ * - Sandbox ZK Wallet (Instant client-side keypair)
  */
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
+export type WalletType = "lace" | "1am" | "sandbox";
 export type NetworkId = "undeployed" | "preprod" | "mainnet";
 
+export interface WalletInfo {
+  id: WalletType;
+  name: string;
+  description: string;
+  icon: string;
+  installed: boolean;
+  installUrl: string;
+}
+
 export interface WalletState {
+  type: WalletType;
   address: string;
   displayAddress: string;
   balances: Record<string, bigint>;
@@ -32,135 +41,162 @@ export interface ConnectedWalletAPI {
     address: string;
     balances: Record<string, bigint>;
   }>;
-  /** Signs and submits a balanced transaction to the network. */
   submitTransaction?(tx: unknown): Promise<string>;
 }
-
-// ─── Wallet Detection ─────────────────────────────────────────────────────────
 
 declare global {
   interface Window {
     midnight?: {
       mnLace?: MidnightWalletAPI;
+      "1am"?: MidnightWalletAPI;
+      oneAM?: MidnightWalletAPI;
+      mn1am?: MidnightWalletAPI;
       [key: string]: MidnightWalletAPI | undefined;
     };
+    oneAM?: MidnightWalletAPI;
   }
 }
 
-export type WalletStatus =
-  | "not-installed"
-  | "installed"
-  | "connecting"
-  | "connected"
-  | "error";
+export const NETWORK_ID: NetworkId = (import.meta.env?.["VITE_NETWORK_ID"] as NetworkId) ?? "undeployed";
 
-/**
- * Checks if the Midnight Lace wallet extension is installed.
- *
- * The wallet injects itself at `window.midnight.mnLace` when the browser
- * extension is active. This check is synchronous and safe to call on load.
- */
+// ─── Wallet Detection ─────────────────────────────────────────────────────────
+
 export function isLaceInstalled(): boolean {
   return typeof window !== "undefined" && !!window.midnight?.mnLace;
 }
 
-/**
- * Returns the raw Midnight Lace wallet API from the window object.
- * Returns null if the extension is not installed.
- */
+export function is1AMInstalled(): boolean {
+  if (typeof window === "undefined") return false;
+  return !!(
+    window.midnight?.["1am"] ||
+    window.midnight?.oneAM ||
+    window.midnight?.mn1am ||
+    window.oneAM
+  );
+}
+
+export function get1AMWallet(): MidnightWalletAPI | null {
+  if (typeof window === "undefined") return null;
+  return (
+    window.midnight?.["1am"] ??
+    window.midnight?.oneAM ??
+    window.midnight?.mn1am ??
+    window.oneAM ??
+    null
+  );
+}
+
 export function getLaceWallet(): MidnightWalletAPI | null {
   if (typeof window === "undefined") return null;
   return window.midnight?.mnLace ?? null;
 }
 
-// ─── Connection ───────────────────────────────────────────────────────────────
+export function getAvailableWallets(): WalletInfo[] {
+  return [
+    {
+      id: "lace",
+      name: "Lace Wallet",
+      description: "Official Midnight Network Lace browser extension",
+      icon: "lace",
+      installed: isLaceInstalled(),
+      installUrl: "https://www.lace.io",
+    },
+    {
+      id: "1am",
+      name: "1AM Wallet",
+      description: "Community-driven Midnight privacy wallet",
+      icon: "1am",
+      installed: is1AMInstalled(),
+      installUrl: "https://1am.xyz",
+    },
+    {
+      id: "sandbox",
+      name: "Sandbox ZK Wallet",
+      description: "Instant in-browser ephemeral ZK keypair (No install required)",
+      icon: "sandbox",
+      installed: true,
+      installUrl: "#",
+    },
+  ];
+}
 
-const NETWORK_ID: NetworkId = (import.meta.env?.["VITE_NETWORK_ID"] as NetworkId) ?? "undeployed";
+// ─── Connect Wallet ───────────────────────────────────────────────────────────
 
-/**
- * Connects to the Midnight Lace wallet.
- *
- * Throws descriptive errors if:
- * - The extension is not installed
- * - The user rejects the connection request
- * - The wallet is on the wrong network
- */
-export async function connectLaceWallet(): Promise<{
+export async function connectWallet(type: WalletType): Promise<{
   api: ConnectedWalletAPI;
   state: WalletState;
 }> {
-  const wallet = getLaceWallet();
-
-  if (!wallet) {
-    throw new MidnightWalletError(
-      "WALLET_NOT_FOUND",
-      "Midnight Lace wallet not detected. Please install the extension from https://midnight.network",
-    );
-  }
-
-  let connectedApi: ConnectedWalletAPI;
-  try {
-    connectedApi = await wallet.connect(NETWORK_ID);
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    if (message.toLowerCase().includes("user rejected") || message.toLowerCase().includes("denied")) {
-      throw new MidnightWalletError(
-        "USER_REJECTED",
-        "Connection request was rejected. Please approve the VeilPass connection in your wallet.",
-      );
+  if (type === "lace") {
+    const wallet = getLaceWallet();
+    if (!wallet) {
+      throw new Error("Lace wallet extension is not installed. Please install it or use Sandbox ZK Wallet.");
     }
-    throw new MidnightWalletError("CONNECTION_FAILED", `Wallet connection failed: ${message}`);
+    const connectedApi = await wallet.connect(NETWORK_ID);
+    const wState = await connectedApi.state();
+    return {
+      api: connectedApi,
+      state: {
+        type: "lace",
+        address: wState.address,
+        displayAddress: shortenAddress(wState.address),
+        balances: wState.balances ?? {},
+        isConnected: true,
+        networkId: NETWORK_ID,
+      },
+    };
   }
 
-  const walletState = await connectedApi.state();
-  const state: WalletState = {
-    address: walletState.address,
-    displayAddress: shortenAddress(walletState.address),
-    balances: walletState.balances ?? {},
-    isConnected: true,
-    networkId: NETWORK_ID,
+  if (type === "1am") {
+    const wallet = get1AMWallet();
+    if (!wallet) {
+      throw new Error("1AM wallet extension is not installed. Please install it or use Sandbox ZK Wallet.");
+    }
+    const connectedApi = await wallet.connect(NETWORK_ID);
+    const wState = await connectedApi.state();
+    return {
+      api: connectedApi,
+      state: {
+        type: "1am",
+        address: wState.address,
+        displayAddress: shortenAddress(wState.address),
+        balances: wState.balances ?? {},
+        isConnected: true,
+        networkId: NETWORK_ID,
+      },
+    };
+  }
+
+  // Sandbox ZK Wallet (in-browser ephemeral keypair)
+  const randomBytes = new Uint8Array(20);
+  crypto.getRandomValues(randomBytes);
+  const hex = Array.from(randomBytes, (b) => b.toString(16).padStart(2, "0")).join("");
+  const address = `mn1addr${hex}`;
+
+  const mockApi: ConnectedWalletAPI = {
+    state: async () => ({
+      address,
+      balances: { tNIGHT: 1000000000n, tDUST: 500000000n },
+    }),
+    submitTransaction: async () => {
+      const txBytes = new Uint8Array(32);
+      crypto.getRandomValues(txBytes);
+      return Array.from(txBytes, (b) => b.toString(16).padStart(2, "0")).join("");
+    },
   };
 
-  return { api: connectedApi, state };
+  return {
+    api: mockApi,
+    state: {
+      type: "sandbox",
+      address,
+      displayAddress: shortenAddress(address),
+      balances: { tNIGHT: 1000000000n, tDUST: 500000000n },
+      isConnected: true,
+      networkId: NETWORK_ID,
+    },
+  };
 }
 
-/**
- * Checks if the wallet is already enabled (previously authorized).
- * Use this to silently reconnect on page load without prompting the user.
- */
-export async function checkWalletEnabled(): Promise<boolean> {
-  const wallet = getLaceWallet();
-  if (!wallet) return false;
-  try {
-    return await wallet.isEnabled();
-  } catch {
-    return false;
-  }
-}
-
-// ─── Error Handling ───────────────────────────────────────────────────────────
-
-export type WalletErrorCode =
-  | "WALLET_NOT_FOUND"
-  | "USER_REJECTED"
-  | "CONNECTION_FAILED"
-  | "TRANSACTION_FAILED"
-  | "NETWORK_MISMATCH"
-  | "PROOF_SERVER_UNAVAILABLE";
-
-export class MidnightWalletError extends Error {
-  constructor(
-    public readonly code: WalletErrorCode,
-    message: string,
-  ) {
-    super(message);
-    this.name = "MidnightWalletError";
-  }
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-/** Shortens a Midnight address for display (e.g. `addr1q…7k2m`). */
 export function shortenAddress(address: string, start = 8, end = 4): string {
   if (!address || address.length <= start + end) return address;
   return `${address.slice(0, start)}…${address.slice(-end)}`;

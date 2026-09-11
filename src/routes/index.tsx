@@ -18,11 +18,12 @@ import {
   WalletCards,
   Zap,
   AlertTriangle,
-  Info,
+  Sparkles,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { WalletModal } from "@/components/wallet-modal";
 import { useMidnightWallet } from "@/hooks/use-midnight-wallet";
 import {
   createAgeProof,
@@ -36,21 +37,20 @@ import {
 } from "@/lib/contract-api";
 import type { AgeProof } from "../../contracts/managed-api";
 
-export const Route = createFileRoute("/")(
-  {
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VeilPass | Private Age Proof" },
+      { title: "VeilPass | Private Zero-Knowledge Age Proof" },
       {
         name: "description",
         content:
-          "Prove you meet an age threshold without revealing your birth year — real Midnight ZK proofs.",
+          "Prove you meet an age threshold without revealing your birth year — real Midnight ZK proofs with Lace & 1AM wallet support.",
       },
-      { property: "og:title", content: "VeilPass | Private Age Proof" },
+      { property: "og:title", content: "VeilPass | Private Zero-Knowledge Age Proof" },
       {
         property: "og:description",
         content:
-          "Age / Eligibility Gate built on Midnight Network. Your birth year never leaves your device.",
+          "Age & Eligibility Gate built on Midnight Network. Your birth year never leaves your device.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -74,14 +74,25 @@ const steps = [
 ];
 
 function shorten(value: string, start = 8, end = 6) {
+  if (!value || value.length <= start + end) return value;
   return `${value.slice(0, start)}…${value.slice(-end)}`;
 }
 
 function Index() {
-  // ── Wallet state (real Midnight integration) ──────────────────────────────
-  const { status: walletStatus, walletState, walletApi, error: walletError, isInstalled, connect: connectWallet, disconnect: disconnectWallet } = useMidnightWallet();
+  // ── Wallet State ──────────────────────────────────────────────────────────
+  const {
+    walletState,
+    walletApi,
+    error: walletError,
+    isConnecting,
+    availableWallets,
+    connect: connectWalletType,
+    disconnect: disconnectWallet,
+  } = useMidnightWallet();
 
-  // ── Proof flow state ──────────────────────────────────────────────────────
+  const [walletModalOpen, setWalletModalOpen] = useState(false);
+
+  // ── Proof Flow State ──────────────────────────────────────────────────────
   const [state, setState] = useState<ProofState>("disconnected");
   const [birthYear, setBirthYear] = useState("");
   const [proof, setProof] = useState<AgeProof | null>(null);
@@ -92,22 +103,20 @@ function Index() {
   const [contractAddress, setContractAddress] = useState<string | null>(null);
   const [ledgerState, setLedgerState] = useState<AgeGateLedgerState | null>(null);
 
-  const connected = walletStatus === "connected" || walletStatus === "connecting";
-  const activeStep =
-    state === "disconnected" ? 0 : state === "ready" ? 1 : 2;
+  const activeStep = state === "disconnected" ? 0 : state === "ready" ? 1 : 2;
   const busy = state === "proving" || state === "submitting";
 
-  // ── Sync wallet connection → proof flow ───────────────────────────────────
+  // ── Sync Wallet Connection → Proof Flow ───────────────────────────────────
   useEffect(() => {
-    if (walletStatus === "connected" && state === "disconnected") {
+    if (walletState?.isConnected && state === "disconnected") {
       setState("ready");
       void initContract();
-    } else if (walletStatus !== "connected" && walletStatus !== "connecting" && state !== "disconnected") {
+    } else if (!walletState?.isConnected && state !== "disconnected") {
       setState("disconnected");
     }
-  }, [walletStatus]);
+  }, [walletState?.isConnected]);
 
-  // ── Contract initialisation ───────────────────────────────────────────────
+  // ── Contract Initialisation ───────────────────────────────────────────────
   async function initContract() {
     try {
       const addr = await deployAgeGateContract(walletApi);
@@ -115,27 +124,19 @@ function Index() {
       const ls = await fetchLedgerState();
       setLedgerState(ls);
     } catch {
-      // Non-fatal — address will be shown as "deploying"
+      // Non-fatal
     }
   }
 
-  // ── Refresh ledger state ──────────────────────────────────────────────────
   useEffect(() => {
     if (state === "ready" || state === "verified") {
       void fetchLedgerState().then(setLedgerState);
     }
-    // Also resolve contract address on load
     const addr = getContractAddress();
     if (addr) setContractAddress(addr);
   }, [state]);
 
-  // ── Connect wallet handler ────────────────────────────────────────────────
-  async function handleConnect() {
-    setError("");
-    await connectWallet();
-  }
-
-  // ── Proof generation ──────────────────────────────────────────────────────
+  // ── Proof Generation ──────────────────────────────────────────────────────
   async function generateProof() {
     const year = Number(birthYear);
     if (!Number.isInteger(year) || year < 1900 || year > CURRENT_YEAR) {
@@ -161,7 +162,7 @@ function Index() {
     }
   }
 
-  // ── Proof submission ──────────────────────────────────────────────────────
+  // ── Proof Submission ──────────────────────────────────────────────────────
   async function submitProof() {
     if (!proof) return;
     setState("submitting");
@@ -196,9 +197,17 @@ function Index() {
     setTimeout(() => setCopied(false), 1200);
   }
 
-  // ── Render ────────────────────────────────────────────────────────────────
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
+      {/* Wallet Selector Modal */}
+      <WalletModal
+        open={walletModalOpen}
+        onOpenChange={setWalletModalOpen}
+        wallets={availableWallets}
+        onSelectWallet={(type) => connectWalletType(type)}
+        isConnecting={isConnecting}
+      />
+
       {/* Header */}
       <header className="border-b border-border/70">
         <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 lg:px-8">
@@ -212,48 +221,48 @@ function Index() {
             </span>
           </div>
 
-          {/* Wallet button */}
-          {walletStatus === "connected" ? (
+          {/* Wallet Header Button */}
+          {walletState?.isConnected ? (
             <Button
               variant="outline"
-              className="h-10 gap-2 bg-card"
+              className="h-10 gap-2 bg-card border-primary/30"
               onClick={disconnectWallet}
             >
-              <span className="size-2 rounded-full bg-success" />
+              <span className="size-2 rounded-full bg-success animate-pulse" />
               <span className="font-mono text-xs">
-                {walletState?.displayAddress ?? "Connected"}
+                [{walletState.type.toUpperCase()}] {walletState.displayAddress}
               </span>
-              <Unplug className="size-3.5" />
+              <Unplug className="size-3.5 text-muted-foreground" />
             </Button>
-          ) : walletStatus === "connecting" ? (
+          ) : isConnecting ? (
             <Button className="h-10" disabled>
               <LoaderCircle className="animate-spin" /> Connecting…
             </Button>
           ) : (
-            <Button className="h-10" onClick={handleConnect}>
-              <WalletCards /> Connect wallet
+            <Button className="h-10" onClick={() => setWalletModalOpen(true)}>
+              <WalletCards /> Connect Wallet
             </Button>
           )}
         </div>
       </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-5 pb-16 pt-14 lg:px-8 lg:pt-20">
         <div className="grid items-start gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
           <div className="pt-2">
             <div className="mb-6 flex items-center gap-2 font-mono text-xs uppercase text-primary">
-              <LockKeyhole className="size-4" /> Age / Eligibility Gate
+              <LockKeyhole className="size-4" /> Zero-Knowledge Age Gate
             </div>
             <h1 className="max-w-xl text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
               Prove your age.<br />
               <span className="text-muted-foreground">Keep it private.</span>
             </h1>
             <p className="mt-7 max-w-md text-base leading-7 text-muted-foreground">
-              Verify you're {MIN_AGE}+ without sharing your birth year. Your
-              private data stays on your device — only a ZK proof goes on-chain.
+              Verify you are {MIN_AGE}+ without disclosing your birth year or identity.
+              Your private witness stays in your wallet — only the ZK nullifier is published.
             </p>
 
-            {/* Stats */}
+            {/* Statistics */}
             <div className="mt-10 grid max-w-md grid-cols-3 border-y border-border py-5">
               <div>
                 <div className="font-mono text-lg font-semibold text-primary">0</div>
@@ -263,43 +272,24 @@ function Index() {
                 <div className="font-mono text-lg font-semibold">
                   {ledgerState?.verifiedCount ?? 0}
                 </div>
-                <div className="mt-1 text-xs text-muted-foreground">Verifications on-chain</div>
+                <div className="mt-1 text-xs text-muted-foreground">On-chain verifications</div>
               </div>
               <div className="pl-5">
                 <div className="font-mono text-lg font-semibold">{MIN_AGE}+</div>
-                <div className="mt-1 text-xs text-muted-foreground">Rule proved</div>
+                <div className="mt-1 text-xs text-muted-foreground">Rule enforced</div>
               </div>
             </div>
 
-            {/* Contract address */}
+            {/* Contract Address */}
             {contractAddress && (
               <div className="mt-6 flex items-center gap-2 font-mono text-xs text-muted-foreground">
                 <Code2 className="size-3.5 shrink-0 text-primary" />
-                <span className="truncate">Contract: {shorten(contractAddress, 12, 8)}</span>
+                <span className="truncate">Contract: {shorten(contractAddress, 14, 8)}</span>
                 <ExternalLink className="size-3 shrink-0" />
               </div>
             )}
 
-            {/* Wallet warning */}
-            {!isInstalled && walletStatus !== "connected" && (
-              <div className="mt-6 flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-xs text-amber-600">
-                <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
-                <span>
-                  Midnight Lace wallet not detected. Install it from{" "}
-                  <a
-                    href="https://midnight.network"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="underline"
-                  >
-                    midnight.network
-                  </a>
-                  , or use the demo below.
-                </span>
-              </div>
-            )}
-
-            {/* Wallet error */}
+            {/* Wallet Error Alert */}
             {walletError && (
               <div className="mt-4 flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
                 <AlertTriangle className="mt-0.5 size-3.5 shrink-0" />
@@ -310,18 +300,16 @@ function Index() {
             <div className="mt-9 flex items-start gap-3 text-sm text-muted-foreground">
               <Code2 className="mt-0.5 size-4 shrink-0 text-primary" />
               <span>
-                Powered by a Compact contract on Midnight. Uses{" "}
-                <code className="rounded bg-secondary px-1 font-mono text-xs">
-                  @midnight-ntwrk/dapp-connector-api
-                </code>{" "}
-                for real wallet integration.
+                Powered by Midnight Network Compact contracts. Compatible with{" "}
+                <span className="font-medium text-foreground">Lace Wallet</span> and{" "}
+                <span className="font-medium text-foreground">1AM Wallet</span>.
               </span>
             </div>
           </div>
 
-          {/* Proof card */}
+          {/* Interactive Proof Card */}
           <div className="border border-border bg-card shadow-panel">
-            {/* Card header */}
+            {/* Steps Header */}
             <div className="border-b border-border px-6 py-5 sm:px-8">
               <div className="flex items-center justify-between">
                 <div>
@@ -334,6 +322,7 @@ function Index() {
                   <ShieldCheck className="size-5" />
                 </div>
               </div>
+
               <div className="mt-6 grid grid-cols-3 gap-2">
                 {steps.map(({ label, icon: Icon }, index) => (
                   <div key={label} className="flex items-center gap-2">
@@ -353,7 +342,9 @@ function Index() {
                       )}
                     </div>
                     <span
-                      className={`hidden text-xs sm:block ${index <= activeStep ? "text-foreground" : "text-muted-foreground"}`}
+                      className={`hidden text-xs sm:block ${
+                        index <= activeStep ? "text-foreground" : "text-muted-foreground"
+                      }`}
                     >
                       {label}
                     </span>
@@ -365,7 +356,7 @@ function Index() {
               </div>
             </div>
 
-            {/* Card body */}
+            {/* Step Body */}
             <div className="min-h-[420px] p-6 sm:p-8">
 
               {/* ── Step 0: Disconnected ────────────────────────────── */}
@@ -374,43 +365,27 @@ function Index() {
                   <div className="flex size-16 items-center justify-center rounded-full border border-border bg-secondary">
                     <WalletCards className="size-7 text-muted-foreground" />
                   </div>
-                  <h2 className="mt-6 text-xl font-semibold">Connect to begin</h2>
+                  <h2 className="mt-6 text-xl font-semibold">Connect to Begin</h2>
                   <p className="mt-2 max-w-xs text-sm leading-6 text-muted-foreground">
-                    {isInstalled
-                      ? "Connect your Midnight Lace wallet to create and submit a private age proof."
-                      : "Connect your Midnight Lace wallet — or use the demo flow without a wallet."}
+                    Connect your <strong>Lace Wallet</strong>, <strong>1AM Wallet</strong>, or use the instant Sandbox ZK wallet.
                   </p>
 
-                  <Button
-                    className="mt-7 h-11 px-6"
-                    onClick={handleConnect}
-                    disabled={walletStatus === "connecting"}
-                  >
-                    {walletStatus === "connecting" ? (
-                      <><LoaderCircle className="animate-spin" /> Connecting…</>
-                    ) : isInstalled ? (
-                      <>Connect Lace wallet <ArrowRight /></>
-                    ) : (
-                      <>Demo mode <ArrowRight /></>
-                    )}
-                  </Button>
-
-                  {!isInstalled && (
-                    <div className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <Info className="size-3.5" />
-                      <span>
-                        Demo mode runs entirely in-browser.{" "}
-                        <a
-                          href="https://midnight.network"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-primary underline"
-                        >
-                          Get real wallet →
-                        </a>
-                      </span>
-                    </div>
-                  )}
+                  <div className="mt-7 flex flex-col gap-2 w-full max-w-xs">
+                    <Button
+                      className="h-11 w-full gap-2"
+                      onClick={() => setWalletModalOpen(true)}
+                      disabled={isConnecting}
+                    >
+                      <WalletCards className="size-4" /> Select Wallet
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="h-10 w-full gap-2 text-xs text-muted-foreground"
+                      onClick={() => connectWalletType("sandbox")}
+                    >
+                      <Sparkles className="size-3.5 text-primary" /> Instant Sandbox Wallet
+                    </Button>
+                  </div>
                 </div>
               )}
 
@@ -422,9 +397,9 @@ function Index() {
                       <KeyRound className="size-4" />
                     </div>
                     <div>
-                      <h2 className="text-sm font-semibold">Private witness</h2>
+                      <h2 className="text-sm font-semibold">Private Witness Input</h2>
                       <p className="text-xs text-muted-foreground">
-                        Processed locally · never sent on-chain
+                        Evaluated locally · never sent to blockchain
                       </p>
                     </div>
                   </div>
@@ -433,7 +408,7 @@ function Index() {
                     htmlFor="birth-year"
                     className="mt-7 block text-sm font-medium"
                   >
-                    Your birth year
+                    Your Birth Year
                   </label>
                   <Input
                     id="birth-year"
@@ -441,7 +416,7 @@ function Index() {
                     inputMode="numeric"
                     min="1900"
                     max={CURRENT_YEAR}
-                    placeholder="e.g. 1994"
+                    placeholder="e.g. 1998"
                     value={birthYear}
                     onChange={(e) => {
                       setBirthYear(e.target.value);
@@ -456,45 +431,44 @@ function Index() {
                     </p>
                   )}
 
-                  <div className="mt-6 space-y-3 bg-secondary/60 p-4">
+                  <div className="mt-6 space-y-3 bg-secondary/60 p-4 rounded-lg">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">Public condition</span>
+                      <span className="text-muted-foreground">Public Condition</span>
                       <span className="font-mono">age ≥ {MIN_AGE}</span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">Private input</span>
-                      <span className="flex items-center gap-1.5 font-mono">
-                        <LockKeyhole className="size-3" /> birthYear
+                      <span className="text-muted-foreground">Private Witness</span>
+                      <span className="flex items-center gap-1.5 font-mono text-primary">
+                        <LockKeyhole className="size-3" /> localBirthYear
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">Contract</span>
+                      <span className="text-muted-foreground">Smart Contract</span>
                       <span className="font-mono">AgeGate.compact</span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground">Proof system</span>
-                      <span className="font-mono">PLONK (Midnight ZK)</span>
+                      <span className="text-muted-foreground">Wallet Provider</span>
+                      <span className="font-mono uppercase text-foreground">
+                        {walletState?.type ?? "Connected"}
+                      </span>
                     </div>
                   </div>
 
                   <Button
-                    className="mt-7 h-12 w-full text-sm"
+                    className="mt-7 h-12 w-full text-sm font-medium"
                     disabled={!birthYear || busy}
                     onClick={generateProof}
                   >
                     {state === "proving" ? (
                       <>
-                        <LoaderCircle className="animate-spin" /> Building zero-knowledge proof…
+                        <LoaderCircle className="animate-spin" /> Building Zero-Knowledge Proof…
                       </>
                     ) : (
                       <>
-                        <Zap /> Generate proof
+                        <Zap className="size-4" /> Generate Proof
                       </>
                     )}
                   </Button>
-                  <p className="mt-3 text-center text-[11px] text-muted-foreground">
-                    Your birth year is used only locally — it is discarded after proof generation.
-                  </p>
                 </div>
               )}
 
@@ -506,39 +480,34 @@ function Index() {
                       <Check className="size-4" />
                     </div>
                     <div>
-                      <h2 className="text-sm font-semibold">Proof generated</h2>
+                      <h2 className="text-sm font-semibold">ZK Proof Generated</h2>
                       <p className="text-xs text-muted-foreground">
-                        Your private witness was discarded
+                        Your birth year witness was discarded
                       </p>
                     </div>
                   </div>
 
-                  <div className="my-7 border border-primary/30 bg-primary/5 p-5">
+                  <div className="my-7 border border-primary/30 bg-primary/5 p-5 rounded-lg">
                     <div className="flex items-center gap-2 text-sm font-medium text-primary">
-                      <ShieldCheck className="size-4" /> Eligibility proved
+                      <ShieldCheck className="size-4" /> Age Threshold Proven
                     </div>
                     <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                      The ZK proof confirms you are {proof.referenceYear - proof.minAge} years old or
-                      more without exposing the exact year.
+                      The ZK circuit validates that your age satisfies the requirement without publishing your birth year.
                     </p>
                   </div>
 
                   <div className="space-y-4 font-mono text-xs">
                     <div className="flex items-center justify-between border-b border-border pb-3">
-                      <span className="font-sans text-muted-foreground">Proof system</span>
-                      <span>PLONK</span>
+                      <span className="font-sans text-muted-foreground">Circuit</span>
+                      <span>proveAge</span>
                     </div>
                     <div className="flex items-center justify-between border-b border-border pb-3">
                       <span className="font-sans text-muted-foreground">Nullifier</span>
                       <span>{shorten(proof.nullifier)}</span>
                     </div>
-                    <div className="flex items-center justify-between border-b border-border pb-3">
-                      <span className="font-sans text-muted-foreground">Reference year</span>
-                      <span>{proof.referenceYear}</span>
-                    </div>
                     <div className="flex items-center justify-between">
-                      <span className="font-sans text-muted-foreground">Payload</span>
-                      <span className="text-primary">VALID</span>
+                      <span className="font-sans text-muted-foreground">ZK Payload Status</span>
+                      <span className="text-primary font-semibold">VALID</span>
                     </div>
                   </div>
 
@@ -549,10 +518,10 @@ function Index() {
                   )}
 
                   <Button
-                    className="mt-8 h-12 w-full"
+                    className="mt-8 h-12 w-full gap-2"
                     onClick={submitProof}
                   >
-                    Submit to contract <ChevronRight />
+                    Submit Proof to Contract <ChevronRight className="size-4" />
                   </Button>
                   <Button
                     variant="ghost"
@@ -571,12 +540,12 @@ function Index() {
                     <div className="absolute inset-2 animate-ping rounded-full border border-primary/30" />
                     <CircleDot className="size-7 animate-pulse text-primary" />
                   </div>
-                  <h2 className="mt-7 text-xl font-semibold">Verifying on-chain</h2>
+                  <h2 className="mt-7 text-xl font-semibold">Verifying On-Chain</h2>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    The Compact circuit is checking your proof and nullifier.
+                    The Compact circuit is recording your nullifier and updating the verified count.
                   </p>
                   <div className="mt-7 flex items-center gap-2 font-mono text-xs text-primary">
-                    <LoaderCircle className="size-3.5 animate-spin" /> Submitting transaction
+                    <LoaderCircle className="size-3.5 animate-spin" /> Submitting transaction…
                   </div>
                 </div>
               )}
@@ -587,16 +556,16 @@ function Index() {
                   <div className="success-ring flex size-20 items-center justify-center rounded-full bg-success text-success-foreground">
                     <CheckCircle2 className="size-9" />
                   </div>
-                  <h2 className="mt-7 text-2xl font-semibold">Age verified</h2>
+                  <h2 className="mt-7 text-2xl font-semibold">Age Verified</h2>
                   <p className="mt-2 max-w-xs text-sm leading-6 text-muted-foreground">
-                    Access granted. No personal data was stored by the contract.
+                    Access granted! Zero personal data was stored on the blockchain ledger.
                   </p>
                   <Button
                     type="button"
                     variant="secondary"
                     size="sm"
                     onClick={copyTransaction}
-                    className="mt-6 font-mono text-xs text-muted-foreground"
+                    className="mt-6 font-mono text-xs text-muted-foreground gap-2"
                   >
                     {shorten(txHash, 10, 8)}{" "}
                     {copied ? (
@@ -606,14 +575,14 @@ function Index() {
                     )}
                   </Button>
                   <div className="mt-4 text-xs text-muted-foreground">
-                    Total verifications: {ledgerState?.verifiedCount ?? "—"}
+                    Total ledger verifications: {ledgerState?.verifiedCount ?? "—"}
                   </div>
                   <Button
                     variant="outline"
                     className="mt-6 h-11 bg-card"
                     onClick={reset}
                   >
-                    <RotateCcw /> Create another proof
+                    <RotateCcw /> Create Another Proof
                   </Button>
                 </div>
               )}
@@ -622,36 +591,33 @@ function Index() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Feature Footers */}
       <section className="border-t border-border bg-card/50">
         <div className="mx-auto grid max-w-6xl gap-7 px-5 py-10 sm:grid-cols-3 lg:px-8">
           <div className="flex gap-3">
             <LockKeyhole className="mt-0.5 size-4 shrink-0 text-primary" />
             <div>
-              <h3 className="text-sm font-medium">Local by design</h3>
+              <h3 className="text-sm font-medium">Local by Design</h3>
               <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                Birth year is used only in-browser and discarded before any
-                network call is made.
+                Your birth year witness is used solely inside local ZK proving and discarded immediately.
               </p>
             </div>
           </div>
           <div className="flex gap-3">
             <Fingerprint className="mt-0.5 size-4 shrink-0 text-primary" />
             <div>
-              <h3 className="text-sm font-medium">Replay protected</h3>
+              <h3 className="text-sm font-medium">Replay Protected</h3>
               <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                A cryptographic nullifier prevents duplicate credential use
-                across the same contract.
+                Persistent cryptographic nullifiers prevent double-credential use without identity tracking.
               </p>
             </div>
           </div>
           <div className="flex gap-3">
-            <Code2 className="mt-0.5 size-4 shrink-0 text-primary" />
+            <WalletCards className="mt-0.5 size-4 shrink-0 text-primary" />
             <div>
-              <h3 className="text-sm font-medium">Real wallet integration</h3>
+              <h3 className="text-sm font-medium">Lace & 1AM Wallet Support</h3>
               <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                Uses <code className="font-mono text-[10px]">@midnight-ntwrk/dapp-connector-api</code>{" "}
-                to connect the Midnight Lace wallet.
+                Connect seamlessly with Lace Wallet, 1AM Wallet, or instant sandbox testing.
               </p>
             </div>
           </div>

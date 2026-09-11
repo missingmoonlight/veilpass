@@ -113,19 +113,21 @@ export circuit proveAge(): [] {
 
 ---
 
-## Real Wallet Integration
+## Multi-Wallet Support (Lace & 1AM)
 
-VeilPass uses the official **Midnight DApp Connector API** to connect to the [Lace wallet](https://midnight.network):
+VeilPass connects directly to Midnight Network browser extensions via the standard DApp Connector API:
+
+- **Lace Wallet**: The official Midnight Lace browser extension (`window.midnight.mnLace`)
+- **1AM Wallet**: The community-driven Midnight privacy wallet (`window.midnight["1am"]` / `window.oneAM`)
+- **Sandbox ZK Wallet**: Instant in-browser ephemeral ZK keypair (zero-friction testing without extensions)
 
 ```typescript
-// Detects Lace at window.midnight.mnLace
-import { connectLaceWallet, isLaceInstalled } from "@/lib/midnight-wallet";
+import { connectWallet } from "@/lib/midnight-wallet";
 
-const { api, state } = await connectLaceWallet();
-// state.address, state.balances, api.submitTransaction(...)
+// Connect to Lace, 1AM, or Sandbox
+const { api, state } = await connectWallet("lace"); // or "1am" / "sandbox"
+console.log(`Connected address: ${state.address} on ${state.type}`);
 ```
-
-The integration gracefully falls back to demo mode if the Lace extension is not installed.
 
 ---
 

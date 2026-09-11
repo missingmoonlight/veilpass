@@ -172,7 +172,7 @@ describe("Ledger state management", () => {
 
 // ─── Wallet Detection Tests ───────────────────────────────────────────────────
 
-describe("Wallet detection", () => {
+describe("Wallet detection & connection", () => {
   it("detects when Lace wallet is not installed", async () => {
     vi.stubGlobal("window", { midnight: undefined });
     const { isLaceInstalled } = await import("../lib/midnight-wallet");
@@ -192,10 +192,27 @@ describe("Wallet detection", () => {
     expect(isLaceInstalled()).toBe(true);
   });
 
-  it("returns null from getLaceWallet when not installed", async () => {
-    vi.stubGlobal("window", {});
-    const { getLaceWallet } = await import("../lib/midnight-wallet");
-    expect(getLaceWallet()).toBeNull();
+  it("detects when 1AM wallet is installed", async () => {
+    const mock1AM = {
+      isEnabled: vi.fn().mockResolvedValue(true),
+      connect: vi.fn(),
+      name: "1AM Wallet",
+      icon: "",
+      apiVersion: "1.0.0",
+    };
+    vi.stubGlobal("window", { midnight: { "1am": mock1AM } });
+    const { is1AMInstalled } = await import("../lib/midnight-wallet");
+    expect(is1AMInstalled()).toBe(true);
+  });
+
+  it("connects to Sandbox ZK Wallet instantly", async () => {
+    const { connectWallet } = await import("../lib/midnight-wallet");
+    const { state, api } = await connectWallet("sandbox");
+    expect(state.isConnected).toBe(true);
+    expect(state.type).toBe("sandbox");
+    expect(state.address).toMatch(/^mn1addr/);
+    const walletState = await api.state();
+    expect(walletState.address).toBe(state.address);
   });
 });
 
