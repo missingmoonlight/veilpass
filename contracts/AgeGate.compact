@@ -1,0 +1,46 @@
+pragma language_version >= 0.23;
+
+import CompactStandardLibrary;
+
+// Public state: only the policy, nullifiers, and total verifications are visible.
+export sealed ledger referenceYear: Uint<16>;
+export sealed ledger minAge: Uint<16>;
+export ledger usedNullifiers: Set<Bytes<32>>;
+export ledger verifiedCount: Counter;
+
+// Private witnesses: supplied by the user's wallet and never put on the ledger.
+witness localBirthYear(): Uint<16>;
+witness localSecretKey(): Bytes<32>;
+
+constructor(currentYear: Uint<16>, minimumAge: Uint<16>) {
+  referenceYear = disclose(currentYear);
+  minAge = disclose(minimumAge);
+}
+
+export pure circuit nullifier(secretKey: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([
+    pad(32, "veilpass:age-gate:"),
+    secretKey
+  ]);
+}
+
+export circuit proveAge(): [] {
+  const secretKey = localSecretKey();
+  const proofNullifier = nullifier(secretKey);
+  assert(
+    !usedNullifiers.member(disclose(proofNullifier)),
+    "AgeGate: credential already used"
+  );
+
+  const birthYear = localBirthYear();
+  assert(birthYear <= referenceYear, "AgeGate: invalid birth year");
+  const age = (referenceYear - birthYear) as Uint<16>;
+  assert(age >= minAge, "AgeGate: minimum age not met");
+
+  usedNullifiers.insert(disclose(proofNullifier));
+  verifiedCount.increment(1);
+}
+
+export circuit isNullifierUsed(proofNullifier: Bytes<32>): Boolean {
+  return usedNullifiers.member(disclose(proofNullifier));
+}
