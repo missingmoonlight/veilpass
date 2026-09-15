@@ -282,11 +282,17 @@ function Index() {
 
             {/* Contract Address */}
             {contractAddress && (
-              <div className="mt-6 flex items-center gap-2 font-mono text-xs text-muted-foreground">
+              <a
+                href={`https://midnightexplorer.com/contract/${contractAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors bg-secondary/50 px-3 py-1.5 rounded-md border border-border"
+                title="View contract on Midnight Explorer"
+              >
                 <Code2 className="size-3.5 shrink-0 text-primary" />
                 <span className="truncate">Contract: {shorten(contractAddress, 14, 8)}</span>
                 <ExternalLink className="size-3 shrink-0" />
-              </div>
+              </a>
             )}
 
             {/* Wallet Error Alert */}
@@ -560,20 +566,39 @@ function Index() {
                   <p className="mt-2 max-w-xs text-sm leading-6 text-muted-foreground">
                     Access granted! Zero personal data was stored on the blockchain ledger.
                   </p>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="sm"
-                    onClick={copyTransaction}
-                    className="mt-6 font-mono text-xs text-muted-foreground gap-2"
-                  >
-                    {shorten(txHash, 10, 8)}{" "}
-                    {copied ? (
-                      <Check className="size-3.5 text-primary" />
-                    ) : (
-                      <Copy className="size-3.5" />
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      onClick={copyTransaction}
+                      className="font-mono text-xs text-muted-foreground gap-2"
+                    >
+                      {shorten(txHash, 10, 8)}{" "}
+                      {copied ? (
+                        <Check className="size-3.5 text-primary" />
+                      ) : (
+                        <Copy className="size-3.5" />
+                      )}
+                    </Button>
+                    {txHash && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        asChild
+                        className="text-xs text-primary gap-1"
+                      >
+                        <a
+                          href={`https://midnightexplorer.com/tx/${txHash}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Explorer <ExternalLink className="size-3" />
+                        </a>
+                      </Button>
                     )}
-                  </Button>
+                  </div>
                   <div className="mt-4 text-xs text-muted-foreground">
                     Total ledger verifications: {ledgerState?.verifiedCount ?? "—"}
                   </div>

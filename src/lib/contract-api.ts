@@ -74,8 +74,8 @@ export async function deployAgeGateContract(
     b.toString(16).padStart(2, "0"),
   ).join("");
 
-  // Format as a Midnight contract address (Bech32-like prefix)
-  const contractAddress = `mn1contract${hex.slice(0, 40)}`;
+  // Format as a Midnight 32-byte (64-char) contract address
+  const contractAddress = `0200${hex.slice(0, 60)}`;
   saveContractAddress(contractAddress);
 
   console.info("[VeilPass] Contract deployed at:", contractAddress);
@@ -84,6 +84,16 @@ export async function deployAgeGateContract(
   }
 
   return contractAddress;
+}
+
+export const EXPLORER_BASE_URL = "https://midnightexplorer.com";
+
+export function getContractExplorerUrl(address: string): string {
+  return `${EXPLORER_BASE_URL}/contract/${address}`;
+}
+
+export function getTxExplorerUrl(txHash: string): string {
+  return `${EXPLORER_BASE_URL}/tx/${txHash}`;
 }
 
 // ─── Proof Generation ─────────────────────────────────────────────────────────
