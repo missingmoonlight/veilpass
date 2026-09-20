@@ -284,7 +284,7 @@ function Index() {
             <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
               <span className="font-mono text-muted-foreground">Preprod Contract:</span>
               <a
-                href="https://midnightexplorer.com/contract/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586"
+                href="https://midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] text-primary hover:bg-primary/20 transition"
