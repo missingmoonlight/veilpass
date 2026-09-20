@@ -4,11 +4,12 @@
 
 [![CI](https://github.com/missingmoonlight/veilpass/actions/workflows/ci.yml/badge.svg)](https://github.com/missingmoonlight/veilpass/actions/workflows/ci.yml)
 [![Built with Midnight](https://img.shields.io/badge/Built%20with-Midnight%20Network-6C47FF?style=flat)](https://midnight.network)
+[![X Profile](https://img.shields.io/badge/X-@VeilPass__web3-black?logo=x)](https://x.com/VeilPass_web3)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://veilpass-omega.vercel.app/) · [Compact Contracts](./contracts/) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
+[Live Demo](https://veilpass-omega.vercel.app/) · [Demo Video](./livedemo.mp4) · [X / Twitter](https://x.com/VeilPass_web3) · [Compact Contract](./contracts/AgeGate.compact) · [CI/CD](https://github.com/missingmoonlight/veilpass/actions)
 
 </div>
 
@@ -138,6 +139,44 @@ console.log(`Connected address: ${state.address} on ${state.type}`);
 
 ---
 
+## 🎥 Product Demo Video
+
+A full end-to-end walkthrough demonstrating wallet connection (Lace & 1AM), client-side ZK proof generation, and verification on the Midnight Preprod testnet:
+
+▶️ **[Watch Full MVP Demo Video (`livedemo.mp4`)](./livedemo.mp4)**
+
+---
+
+## 📖 Usage Guide
+
+Follow these 4 simple steps to prove your age anonymously with VeilPass:
+
+```
+1. Connect Wallet  ──►  2. Enter Birth Year  ──►  3. Generate Proof  ──►  4. Verify On-Chain
+   (Lace / 1AM)         (Private Witness)         (Local ZK Circuit)      (Midnight Ledger)
+```
+
+1. **Connect Your Wallet**:
+   - Click **Connect Wallet** in the top navigation.
+   - Choose **Midnight Lace Wallet**, **1AM Wallet**, or test immediately with the built-in **Sandbox ZK Wallet**.
+   - Ensure your extension network is configured to **Midnight Preprod**.
+
+2. **Supply Birth Year (Private Witness)**:
+   - Enter your four-digit birth year (e.g. `2000`).
+   - 🔒 *Privacy Guarantee*: Your birth year is evaluated purely in local memory inside the `proveAge` circuit and is never broadcast across the network.
+
+3. **Generate Zero-Knowledge Proof**:
+   - Click **Generate ZK Proof**.
+   - The Compact circuit evaluates `(referenceYear - birthYear) >= minAge` (e.g. `age >= 18`).
+   - Computes a deterministic 32-byte cryptographic nullifier from your ephemeral secret key.
+
+4. **Submit & Verify on Midnight Preprod**:
+   - Click **Submit Proof to Midnight**.
+   - Your wallet signs and broadcasts the nullifier transaction to the Midnight Preprod ledger.
+   - The on-chain contract validates that the nullifier hasn't been used, records it in `usedNullifiers`, and increments the public `verifiedCount`.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -193,12 +232,12 @@ npm run build
 
 The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on every push:
 
-| Job | Description |
-|-----|-------------|
-| **lint** | ESLint + TypeScript type check |
-| **test** | 20 Vitest tests |
-| **build** | Production Vite build |
-| **contracts** | Compact syntax validation (pragma, exports) |
+| Job | Description | Status |
+|-----|-------------|:------:|
+| **lint** | ESLint + TypeScript type check | 🟢 Passing |
+| **test** | 20 Vitest tests | 🟢 Passing |
+| **build** | Production Vite build | 🟢 Passing |
+| **contracts** | Compact syntax & circuit validation | 🟢 Passing |
 
 ---
 
@@ -208,6 +247,7 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on every push:
 veilpass/
 ├── contracts/
 │   ├── AgeGate.compact          # Single ZK age-gate circuit
+│   ├── deployment.json          # Preprod deployment records & metadata
 │   └── managed-api.ts           # Pre-generated TypeScript bindings
 ├── src/
 │   ├── hooks/
@@ -219,6 +259,10 @@ veilpass/
 │   │   └── index.tsx                # Main dApp UI
 │   └── tests/
 │       └── age-gate.test.ts         # 20 age gate, ZK, nullifier & wallet tests
+├── public/
+│   └── screenshots/
+│       └── compact_compile.png      # Compact compiler terminal proof
+├── livedemo.mp4                     # Product MVP walkthrough video
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                   # GitHub Actions CI/CD
@@ -227,17 +271,17 @@ veilpass/
 
 ---
 
-## Submission Checklist
+## 📋 Submission Checklist & Verification Matrix
 
-- [x] Fully functional dApp using Midnight's privacy model (Age / Eligibility Gate)
-- [x] Minimum 3 tests passing (20 tests passing)
-- [x] CI/CD pipeline (`.github/workflows/ci.yml`)
-- [x] Approved idea: **Age / Eligibility Gate**
-- [x] Minimum 10 meaningful commits
-- [x] Public GitHub repository with complete README
-- [x] Live demo link: [missingmoonlight.github.io/veilpass](https://missingmoonlight.github.io/veilpass)
-- [x] Privacy model section (see above)
-- [x] Real wallet integration via `@midnight-ntwrk/dapp-connector-api`
+- [x] **Public GitHub repository with full documentation**: [`missingmoonlight/veilpass`](https://github.com/missingmoonlight/veilpass)
+- [x] **Working MVP live on Preprod with verifiable contract address**:
+  - **Live DApp URL**: [https://veilpass-omega.vercel.app/](https://veilpass-omega.vercel.app/)
+  - **Deployed Contract Address**: [`020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`](https://preprod.midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586)
+- [x] **Comprehensive Documentation**: Complete README + setup instructions + step-by-step usage guide
+- [x] **CI/CD Pipeline Running**: Active GitHub Actions workflow with passing runs on product repo
+- [x] **Product X Profile Created & Linked**: [@VeilPass_web3](https://x.com/VeilPass_web3)
+- [x] **Demo Video of the MVP**: [`livedemo.mp4`](./livedemo.mp4)
+- [x] **Minimum 15 Meaningful Commits**: 35+ commits in September 2026
 
 ---
 
