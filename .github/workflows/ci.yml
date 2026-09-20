@@ -33,7 +33,7 @@ jobs:
 
   # ── 2. Test Suite Execution ─────────────────────────────────────────────────
   test:
-    name: Vitest Test Suite (28 Tests)
+    name: Vitest Test Suite (20 Tests)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -79,7 +79,7 @@ jobs:
           path: .output/
           retention-days: 3
 
-  # ── 4. Verify Compact Smart Contracts ───────────────────────────────────────
+  # ── 4. Verify Compact Smart Contract ────────────────────────────────────────
   contracts:
     name: Compact Contract Verification
     runs-on: ubuntu-latest
@@ -92,7 +92,6 @@ jobs:
           echo "Checking contract files..."
           ls -la contracts/
           test -f contracts/AgeGate.compact && echo "✅ AgeGate.compact found"
-          test -f contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact found"
           test -f contracts/managed-api.ts && echo "✅ managed-api.ts found"
           echo "Contract verification complete."
 
@@ -100,7 +99,6 @@ jobs:
         run: |
           echo "Validating Compact contract syntax..."
           grep -q "pragma language_version >= 0.23" contracts/AgeGate.compact && echo "✅ AgeGate.compact: pragma OK"
-          grep -q "pragma language_version >= 0.23" contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact: pragma OK"
           grep -q "export circuit proveAge" contracts/AgeGate.compact && echo "✅ AgeGate.compact: proveAge circuit OK"
-          grep -q "export circuit castVote" contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact: castVote circuit OK"
+          grep -q "export circuit isNullifierUsed" contracts/AgeGate.compact && echo "✅ AgeGate.compact: isNullifierUsed circuit OK"
           echo "All contract validations passed."

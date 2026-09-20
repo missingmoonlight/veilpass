@@ -66,12 +66,11 @@ localSecretKey ──┤  ZK Proof  →   assert !usedNullifiers.member(nullifie
 
 ---
 
-## Contracts
+## Smart Contract
 
 | File | Description |
 |------|-------------|
-| [`contracts/AgeGate.compact`](./contracts/AgeGate.compact) | Main ZK age-gate circuit. Checks `age >= minAge` and records a one-time nullifier. |
-| [`contracts/PrivateVoting.compact`](./contracts/PrivateVoting.compact) | Anonymous ballot contract. Voters cast votes privately; only tallies are public. |
+| [`contracts/AgeGate.compact`](./contracts/AgeGate.compact) | Main ZK age-gate circuit. Evaluates `age >= minAge` locally and verifies one-time nullifier. |
 | [`contracts/managed-api.ts`](./contracts/managed-api.ts) | TypeScript bindings (pre-generated from Compact compiler). |
 
 ### AgeGate.compact — Key circuits
@@ -155,7 +154,7 @@ npm run test
 bun test
 ```
 
-Expected output: **29 tests passing** across 3 test suites.
+Expected output: **20 tests passing**.
 
 ### Building for Production
 
@@ -172,7 +171,7 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on every push:
 | Job | Description |
 |-----|-------------|
 | **lint** | ESLint + TypeScript type check |
-| **test** | 29 Vitest tests across 3 suites |
+| **test** | 20 Vitest tests |
 | **build** | Production Vite build |
 | **contracts** | Compact syntax validation (pragma, exports) |
 
@@ -183,21 +182,18 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on every push:
 ```
 veilpass/
 ├── contracts/
-│   ├── AgeGate.compact          # ZK age-gate circuit
-│   ├── PrivateVoting.compact    # ZK anonymous voting circuit
+│   ├── AgeGate.compact          # Single ZK age-gate circuit
 │   └── managed-api.ts           # Pre-generated TypeScript bindings
 ├── src/
 │   ├── hooks/
 │   │   └── use-midnight-wallet.ts   # React hook for wallet lifecycle
 │   ├── lib/
-│   │   ├── midnight-wallet.ts       # DApp Connector API integration
+│   │   ├── midnight-wallet.ts       # DApp Connector API integration (Lace & 1AM)
 │   │   └── contract-api.ts          # Contract interaction layer
 │   ├── routes/
 │   │   └── index.tsx                # Main dApp UI
 │   └── tests/
-│       ├── age-gate.test.ts         # 12 age gate tests
-│       ├── voting.test.ts           # 11 voting tests
-│       └── wallet.test.ts           # 6 wallet integration tests
+│       └── age-gate.test.ts         # 20 age gate, ZK, nullifier & wallet tests
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                   # GitHub Actions CI/CD
@@ -209,7 +205,7 @@ veilpass/
 ## Submission Checklist
 
 - [x] Fully functional dApp using Midnight's privacy model (Age / Eligibility Gate)
-- [x] Minimum 3 tests passing (29 tests across 3 suites)
+- [x] Minimum 3 tests passing (20 tests passing)
 - [x] CI/CD pipeline (`.github/workflows/ci.yml`)
 - [x] Approved idea: **Age / Eligibility Gate**
 - [x] Minimum 10 meaningful commits
