@@ -14,26 +14,6 @@
 
 ---
 
-## 🚀 Live Deployed Contracts on Midnight Network
-
-| Smart Contract | Deployed Contract Address | Explorer Link | Circuits Verified | Network |
-|---|---|---|---|---|
-| **`AgeGate.compact`** | `0200f5c2ac548eb24c18bae12e17193eb05e9a7abf72770fd6f671c667a42125` | [🔎 View on Midnight Explorer](https://midnightexplorer.com/contract/0200f5c2ac548eb24c18bae12e17193eb05e9a7abf72770fd6f671c667a42125) | `proveAge` (4,238 rows), `isNullifierUsed` (305 rows) | Midnight Preprod |
-| **`PrivateVoting.compact`** | `0200611d5069dd8c81d3edce4d01b33bc2282ab3e5f044837a5180f673e1887a` | [🔎 View on Midnight Explorer](https://midnightexplorer.com/contract/0200611d5069dd8c81d3edce4d01b33bc2282ab3e5f044837a5180f673e1887a) | `castVote` (4,192 rows), `isNullifierUsed` (305 rows) | Midnight Preprod |
-
-### 📸 Terminal Compilation & Deployment Proofs
-
-#### 1. Compact Compiler Execution (`compact compile`)
-![Compact Compilation Proof](public/screenshots/compact_compile.png)
-
-#### 2. Midnight Contract Deployment Engine (`npm run deploy`)
-![Contract Deployment Proof](public/screenshots/contract_deploy.png)
-
-#### 3. Automated Test Suite (29 Tests Passing)
-![Test Output Proof](public/screenshots/tests_output.png)
-
----
-
 ## What is VeilPass?
 
 ### Product Proposal & Selected Idea
@@ -175,41 +155,12 @@ npm run test
 bun test
 ```
 
-Expected output: **28 tests passing** across 2 test suites.
+Expected output: **29 tests passing** across 3 test suites.
 
 ### Building for Production
 
 ```sh
 npm run build
-```
-
----
-
-## Compiling & Deploying the Contracts
-
-The Compact compiler is a standalone binary. To compile the contracts yourself:
-
-```sh
-# Install Compact compiler (Linux/macOS/WSL)
-curl --proto '=https' --tlsv1.2 -LsSf \
-  https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh | sh
-
-# Compile AgeGate contract
-compact compile contracts/AgeGate.compact --output src/generated/
-
-# Compile PrivateVoting contract
-compact compile contracts/PrivateVoting.compact --output src/generated/
-```
-
-The pre-compiled TypeScript bindings are already included in [`contracts/managed-api.ts`](./contracts/managed-api.ts).
-
-### Deploying to Midnight Preprod
-
-```sh
-# With a running Proof Server (Docker) and Lace wallet configured:
-npx create-mn-app --template deploy \
-  --contract contracts/AgeGate.compact \
-  --network preprod
 ```
 
 ---
@@ -221,7 +172,7 @@ The [GitHub Actions workflow](./.github/workflows/ci.yml) runs on every push:
 | Job | Description |
 |-----|-------------|
 | **lint** | ESLint + TypeScript type check |
-| **test** | 23 Vitest tests across 2 suites |
+| **test** | 29 Vitest tests across 3 suites |
 | **build** | Production Vite build |
 | **contracts** | Compact syntax validation (pragma, exports) |
 
@@ -245,7 +196,8 @@ veilpass/
 │   │   └── index.tsx                # Main dApp UI
 │   └── tests/
 │       ├── age-gate.test.ts         # 12 age gate tests
-│       └── voting.test.ts           # 11 voting tests
+│       ├── voting.test.ts           # 11 voting tests
+│       └── wallet.test.ts           # 6 wallet integration tests
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                   # GitHub Actions CI/CD
@@ -257,7 +209,7 @@ veilpass/
 ## Submission Checklist
 
 - [x] Fully functional dApp using Midnight's privacy model (Age / Eligibility Gate)
-- [x] Minimum 3 tests passing (28 tests across 2 suites)
+- [x] Minimum 3 tests passing (29 tests across 3 suites)
 - [x] CI/CD pipeline (`.github/workflows/ci.yml`)
 - [x] Approved idea: **Age / Eligibility Gate**
 - [x] Minimum 10 meaningful commits

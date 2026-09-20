@@ -280,21 +280,6 @@ function Index() {
               </div>
             </div>
 
-            {/* Contract Address */}
-            {contractAddress && (
-              <a
-                href={`https://midnightexplorer.com/contract/${contractAddress}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors bg-secondary/50 px-3 py-1.5 rounded-md border border-border"
-                title="View contract on Midnight Explorer"
-              >
-                <Code2 className="size-3.5 shrink-0 text-primary" />
-                <span className="truncate">Contract: {shorten(contractAddress, 14, 8)}</span>
-                <ExternalLink className="size-3 shrink-0" />
-              </a>
-            )}
-
             {/* Wallet Error Alert */}
             {walletError && (
               <div className="mt-4 flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">

@@ -94,7 +94,6 @@ jobs:
           test -f contracts/AgeGate.compact && echo "✅ AgeGate.compact found"
           test -f contracts/PrivateVoting.compact && echo "✅ PrivateVoting.compact found"
           test -f contracts/managed-api.ts && echo "✅ managed-api.ts found"
-          test -f contracts/deployment.json && echo "✅ deployment.json found"
           echo "Contract verification complete."
 
       - name: Validate Compact syntax and exports
