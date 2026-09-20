@@ -30,7 +30,7 @@ Terminal output verifying successful `AgeGate.compact` compilation and generated
 | Parameter | Details |
 |---|---|
 | **Contract Name** | `AgeGate` (`contracts/AgeGate.compact`) |
-| **Deployed Contract Address** | [`020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`](https://midnightexplorer.com/contract/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586) |
+| **Deployed Contract Address** | [`020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`](https://preprod.midnightexplorer.com/contract/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586) |
 | **Transaction Hash** | `0x01a4369fd6ce11216fbc409e94f45af601332291d21c8395128e88553254c828` |
 | **Block Height** | `1843092` |
 | **Network** | **Midnight Preprod Testnet** |
