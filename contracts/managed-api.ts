@@ -147,10 +147,12 @@ export async function generateAgeProof(
   return { nullifier, referenceYear, minAge, isValid: true };
 }
 
+export const DEFAULT_CONTRACT_ADDRESS = "020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586";
+
 // ─── Contract Address Management ─────────────────────────────────────────────
 
-/** Returns the deployed contract address from env var or localStorage. */
-export function getContractAddress(): string | null {
+/** Returns the deployed contract address from env var, localStorage, or deployed default. */
+export function getContractAddress(): string {
   // Allow override via env (set at build time for production deployments)
   let envAddr: string | undefined;
   try {
@@ -160,10 +162,12 @@ export function getContractAddress(): string | null {
   }
   if (envAddr) return envAddr;
   try {
-    return localStorage.getItem(CONTRACT_ADDRESS_KEY);
+    const stored = localStorage.getItem(CONTRACT_ADDRESS_KEY);
+    if (stored) return stored;
   } catch {
-    return null;
+    // Fall through
   }
+  return DEFAULT_CONTRACT_ADDRESS;
 }
 
 /** Persists the deployed contract address for future sessions. */

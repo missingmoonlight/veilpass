@@ -280,6 +280,20 @@ function Index() {
               </div>
             </div>
 
+            {/* Deployed Contract Address Pill */}
+            <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
+              <span className="font-mono text-muted-foreground">Preprod Contract:</span>
+              <a
+                href="https://midnightexplorer.com/contract/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] text-primary hover:bg-primary/20 transition"
+              >
+                <span>020023cb0894...d586</span>
+                <ExternalLink className="size-3" />
+              </a>
+            </div>
+
             {/* Wallet Error Alert */}
             {walletError && (
               <div className="mt-4 flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-xs text-destructive">
