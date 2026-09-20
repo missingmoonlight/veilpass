@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../../../",
+  "sources": ["contracts/AgeGate.compact", "compiler/standard-library.compact"],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAcA;;;;;;;;;;;;;;;;MAKA,AAAA,SAKC;;OAAA;MAED,AAAA,QAeC;;;;;;;;;;;;;;;;;;;;;;OAAA;MAED,AAAA,eAEC;;;;;cAF8B,gBAAyB;;;;;;;;;;;;;;;;;;yCAAzB,gBAAyB;;;;;;;;;iDAAzB,gBAAyB;;;OAEvD;;;;;;;;;;GA5BA;EAHD;;;;;UAAY,aAAqB;UAAE,YAAoB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IATvD;;;;;;;;;yEAA6C;IAC7C;;;;;;;;;yEAAsC;IACtC;;;;;;;;;;yEAA6C;IAC7C;;;;;;;;;yEAAqC;IAOnC;;;;;;;2HAAyB,aAAW;;yEAAvB;IACb;;;;;;;2HAAkB,YAAU;;yEAAtB;;;;;;;GACP;ECjBD,AAAA,kBAAA;oEAAA;;;EDWA,AAAA,iBAAmC;;0DAAnC,cAAmC;;;;;;;;;;;;;;GAAA;EACnC,AAAA,iBAAoC;;0DAApC,cAAoC;;;;;;;;;;;;;;GAAA;EAOpC,AAAA,YAKC,CAL6B,WAAoB;;mCAG9C,WAAS;GAEZ;EAED,AAAA,WAeC;UAdO,WAA4B;UAC5B,gBAAqC,qBAAV,WAAS;qDAEvC;;;;;;;;;;;4KAA+B,gBAAc;;;;0HAA/B;;UAIX,WAA4B;4BAC3B,WAAS;;oDAAI;;;;;;;;;;;yHAAa;;QACpB,GAAyB;UAAhC,KAA6C,kCAAtC;;;;;;;;;;;sHAAa;4CAAb,GAAyB,IAAT,WAAS;;oBAAzB,GAAyB,GAAT,WAAS;4BAC/B,KAAG;;oDAAI;;;;;;;;;;;yHAAM;;IAEpB;;;;;;;;;;2HAA+B,gBAAc;;;;;wEAA/B;UACd,KAAa;IAAb;;;;;;;;;;6FAAA,KAAa;;;;wEAAA;;GACd;EAED,AAAA,kBAEC,4BAF8B,gBAAyB;mCAC/C;;;;;;;;;;;0JAA+B,gBAAc;;;;wGAA/B;GACtB;;;;;;;;;;;;;;;;IAxCD;qCAAA;;;;;;;;;;;0GAA6C;KAAA;IAC7C;qCAAA;;;;;;;;;;;0GAAsC;KAAA;IACtC;;;;;uCAAA;;;;;;;;;;;;;;;;4GAA6C;;;;;;uCAA7C;;;;;;;;;;;;4GAA6C;;;;;;;;;;;;;;uCAA7C;;;;;;;;;;;;;;;4GAA6C;;;;;;;;;KAAA;IAC7C;qCAAA;;;;;;;;;;;0GAAqC;KAAA;;;;;;;;;;EAWrC,AAAA,SAKC;;;;UAL6B,WAAoB;;;;;;;;uCAApB,WAAoB;GAKjD;;;;"
+}

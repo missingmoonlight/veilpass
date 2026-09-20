@@ -14,6 +14,17 @@
 
 ---
 
+## ⚡ Midnight Compact Circuit Compilation Proof
+
+Terminal output verifying successful `AgeGate.compact` compilation and generated circuits via Compact compiler (`compact 0.5.2`):
+
+![Midnight Compact Circuit Compilation](public/screenshots/compact_compile.png)
+
+* **`proveAge`** (`k=13, rows=4238`): Evaluates `age >= minAge` in zero-knowledge using private witness birth year.
+* **`isNullifierUsed`** (`k=9, rows=305`): Validates uniqueness of 32-byte cryptographic nullifier on the Midnight ledger.
+
+---
+
 ## What is VeilPass?
 
 ### Product Proposal & Selected Idea
