@@ -1,10 +1,11 @@
 {
   "network": "preprod",
   "contractName": "AgeGate",
-  "contractAddress": "020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586",
-  "txHash": "0x01a4369fd6ce11216fbc409e94f45af601332291d21c8395128e88553254c828",
-  "blockHeight": 1843092,
-  "deployedAt": "2026-09-21T01:48:52Z",
-  "explorerUrl": "https://midnightexplorer.com/contract/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586",
+  "contractAddress": "0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26",
+  "txHash": "0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc",
+  "blockHeight": 2724863,
+  "deployedAt": "2026-09-24T16:53:00Z",
+  "explorerUrl": "https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26",
+  "txExplorerUrl": "https://midnightexplorer.com/transactions/0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc",
   "circuits": ["proveAge", "isNullifierUsed"]
 }

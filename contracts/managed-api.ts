@@ -147,7 +147,7 @@ export async function generateAgeProof(
   return { nullifier, referenceYear, minAge, isValid: true };
 }
 
-export const DEFAULT_CONTRACT_ADDRESS = "020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586";
+export const DEFAULT_CONTRACT_ADDRESS = "0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26";
 
 // ─── Contract Address Management ─────────────────────────────────────────────
 

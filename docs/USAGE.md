@@ -38,8 +38,9 @@ To interact with VeilPass on the Midnight Network, you have three flexible optio
 Ensure your browser extension is configured to the **Midnight Preprod Testnet**:
 
 - **Network Name**: Midnight Preprod (`testnet-02`)
-- **Contract Address**: `020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`
-- **Explorer URL**: [https://preprod.midnightexplorer.com](https://preprod.midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586)
+- **Contract Address**: `0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26`
+- **Explorer Contract URL**: [https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26](https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26)
+- **Deployment Transaction**: [https://midnightexplorer.com/transactions/0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc](https://midnightexplorer.com/transactions/0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc)
 
 ---
 

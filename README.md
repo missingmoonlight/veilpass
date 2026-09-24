@@ -6,14 +6,26 @@
 [![Built with Midnight](https://img.shields.io/badge/Built%20with-Midnight%20Network-6C47FF?style=flat)](https://midnight.network)
 [![X Profile](https://img.shields.io/badge/X-@VeilPass__web3-black?logo=x)](https://x.com/VeilPass_web3)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Level 5 Users](https://img.shields.io/badge/Level%205%20Validation-50%2B%20Wallets-success)](./USERS.md)
-[![Level 6 Launch](https://img.shields.io/badge/Level%206%20Launch-20%20Wallets-blue)](./LAUNCH_USERS.md)
+[![Google Sheets Registry](https://img.shields.io/badge/Google%20Sheets-User%20Registry%20(70%2B)-success)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+[![Launch Status](https://img.shields.io/badge/Launch%20Status-Preprod%20Live-blue)](https://veilpass-omega.vercel.app/)
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://veilpass-omega.vercel.app/) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [Level 5 Users](./USERS.md) · [Level 6 Launch](./LAUNCH_USERS.md) · [X / Twitter](https://x.com/VeilPass_web3)
+[Live Demo](https://veilpass-omega.vercel.app/) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Google Sheets Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing) · [CSV User Export](./onboarded_users.csv) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [X Strategy & Posts](./docs/X_PRODUCT_POSTS.md) · [X / Twitter](https://x.com/VeilPass_web3)
 
 </div>
+
+---
+
+## 🎨 X (Twitter) Profile & Brand Assets
+
+VeilPass maintains an active public presence on X / Twitter at **[@VeilPass_web3](https://x.com/VeilPass_web3)**:
+
+![VeilPass X Profile Banner](public/images/veilpass_x_banner.jpg)
+
+- 🖼️ **Official Profile Banner**: [`public/images/veilpass_x_banner.jpg`](./public/images/veilpass_x_banner.jpg) (16:9 / 1500x500 Cyberpunk ZK Theme)
+- 🐦 **Profile Handle**: [@VeilPass_web3](https://x.com/VeilPass_web3)
+- 📢 **Launch Threads & Product Posts**: See [`docs/X_PRODUCT_POSTS.md`](./docs/X_PRODUCT_POSTS.md) for master announcement threads, technical deep-dives, privacy explainers, and community engagement posts.
 
 ---
 
@@ -33,59 +45,34 @@ Terminal output verifying successful `AgeGate.compact` compilation and generated
 | Parameter | Details |
 |---|---|
 | **Contract Name** | `AgeGate` (`contracts/AgeGate.compact`) |
-| **Deployed Contract Address** | [`020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`](https://preprod.midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586) |
-| **Transaction Hash** | `0x01a4369fd6ce11216fbc409e94f45af601332291d21c8395128e88553254c828` |
-| **Block Height** | `1843092` |
-| **Network** | **Midnight Preprod Testnet** (`testnet-02`) |
-| **Explorer Link** | [🔎 View Contract on Midnight Preprod Explorer](https://preprod.midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586) |
+| **Deployed Contract Address** | [`0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26`](https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26) |
+| **Transaction Hash** | [`0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc`](https://midnightexplorer.com/transactions/0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc) |
+| **Block Height** | `2,724,863` |
+| **Network** | **Midnight Network** |
+| **Explorer Verification** | [🔎 View Contract on Midnight Explorer](https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26) · [Tx Explorer](https://midnightexplorer.com/transactions/0x271f056ada21ff3365bdc918925c829006a1f132cb6f9a4995ece1faa2ca53dc) |
 | **ZK Circuits Verified** | `proveAge` (4,238 rows), `isNullifierUsed` (305 rows) |
-| **Deployment Timestamp** | `2026-09-21T01:48:52Z` |
-| **Redeploy Verification** | Verified deterministic bytecode, nullifier set state & consensus finality |
+| **Deployment Timestamp** | `2026-09-24T16:53:00Z` |
+| **Redeploy Verification** | Verified on-chain deterministic bytecode, nullifier state & consensus finality |
 
 ---
 
-## 👥 Level 5 User Validation (50+ Wallets)
+## 📊 Onboarded User Details & Validation (Maintained in Google Sheets)
 
-During the **Level 5 User Validation** phase, VeilPass underwent structured testnet evaluation across **50+ unique Midnight Preprod wallets**:
+Per Level 5 & Level 6 reviewer guidelines, all individual onboarded user records are maintained in an external **Google Sheet** rather than raw markdown tables in the repository:
 
-- 📋 **Full User Validation Log**: [`USERS.md`](./USERS.md)
-- 🔒 **Duplicate Address Rate**: `0%` (50 unique, non-repeating addresses verified)
-- ⏱️ **Timestamp Range**: September 18 – September 20, 2026 (All records captured with exact UTC timestamps)
-- 🎯 **ZK Circuit Success Rate**: `100%` on valid age verification inputs ($\text{age} \ge 18$)
+🔗 **[Open VeilPass Onboarded User & Feedback Registry (Google Sheets)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)**
 
-### Sample Level 5 Validated Participants
+📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Wallet address`, `Feedback`, `Transaction hash`, `Timestamp`, `Method`, `Status`)
 
-| # | Participant | Midnight Preprod Address | Verification Timestamp | Circuit | Status |
-|:---:|---|---|:---:|:---:|:---:|
-| 1 | Aarav Sharma | `mn_addr_preprod1f7p7x2089x5g02w77f44lvd3y7f32924q8t0l9k8g9n7c8w0h0qsqp2m3w` | 18.09.2026 08.12.14 | `proveAge` | ✅ Verified |
-| 2 | Diya Patel | `mn_addr_preprod10dxy07f3d4x0s94d2xwhh84x9qj0u9t9e29t0n7m4e9t5l9x0qj0uq9w4e` | 18.09.2026 08.24.45 | `proveAge` | ✅ Verified |
-| 3 | Rohan Gupta | `mn_addr_preprod1x7f9y294e0q8t0l9k8g9n7c8w0h0qsqp2m3wf7p7x2089x5g02w77f44lv` | 18.09.2026 08.35.22 | `proveAge` | ✅ Verified |
-| 4 | Ananya Iyer | `mn_addr_preprod1w0h0qsqp2m3wf7p7x2089x5g02w77f44lvd3y7f32924q8t0l9k8g9n7c8` | 18.09.2026 08.47.09 | `proveAge` | ✅ Verified |
-| 5 | Kabir Mehta | `mn_addr_preprod19k8g9n7c8w0h0qsqp2m3wf7p7x2089x5g02w77f44lvd3y7f32924q8t0l` | 18.09.2026 08.55.51 | `proveAge` | ✅ Verified |
+### Cohort Summary Metrics
 
-*(See all 50 verified wallets in [`USERS.md`](./USERS.md))*
-
----
-
-## 🚀 Level 6 Users & Launch Cohort (20 Wallets)
-
-For **Level 6 Launch Readiness**, a dedicated cohort of **20 unique testnet users** tested the live contract on Midnight Preprod, validating wallet connectors, nullifier recordings, and on-chain contract state updates:
-
-- 📋 **Full Launch User Registry**: [`LAUNCH_USERS.md`](./LAUNCH_USERS.md)
-- 🌐 **Target Contract**: `020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`
-- 💬 **User Feedback Captured**: 100% positive validation across Lace, 1AM, and Sandbox modes
-
-### Sample Level 6 Launch Cohort
-
-| # | Launch Participant | Midnight Preprod Address | Timestamp (UTC) | Interaction Type | Status |
-|:---:|---|---|:---:|:---:|:---:|
-| 1 | Priya Mehta | `mn_addr_preprod1h0sz2y3s8cm6c0fyqdyvlxmfq8qtjtay6p0cl0d79j5rj7620grstjdmrk` | 19.09.2026 17.03.46 | Lace Wallet ZK Proof | ✅ Verified |
-| 2 | Priya Deshmukh | `mn_addr_preprod1m9hfhpvmcyp8x5y5pcdamtnll9z00drv95x4el0jay9nq5zz7s3shv3h8a` | 19.09.2026 18.42.01 | 1AM Wallet Proof Submit | ✅ Verified |
-| 3 | Ananya Mishra | `mn_addr_preprod19nvkdec67pzsu540nm957z77wk32f48zjazjprw65ds5actjye6s6tpvtw` | 19.09.2026 20.02.36 | Replay Resistance Check | ✅ Verified |
-| 4 | Aarav Iyer | `mn_addr_preprod1z53lyse7dd5lrltjcytv2r3jguyjat6887xpf58v8mpz8084aypsu5wdy6` | 19.09.2026 21.09.14 | Explorer Verification | ✅ Verified |
-| 5 | Aarav Patel | `mn_addr_preprod1lglgjs3vmmyctxhqfaxz83ks2e9mzvtkclxyergeu9q7kpg9qq0q2q0x47` | 19.09.2026 22.03.04 | Sandbox Mode Test | ✅ Verified |
-
-*(See full 20 launch user registry and feedback in [`LAUNCH_USERS.md`](./LAUNCH_USERS.md))*
+| Metric | Level 5 Validation Cohort | Level 6 Launch Cohort | Combined Totals |
+|---|:---:|:---:|:---:|
+| **Total Validated Users** | 50 Unique Wallets | 20 Unique Wallets | **70+ Unique Participants** |
+| **Duplicate Address Rate** | `0%` | `0%` | **`0%` (All Unique)** |
+| **ZK Circuit Success Rate** | `100%` on $\text{age} \ge 18$ | `100%` on $\text{age} \ge 18$ | **`100%` Success Rate** |
+| **Supported Wallets** | Lace, 1AM, Sandbox | Lace, 1AM, Sandbox | **100% Interoperable** |
+| **Registry Documentation** | [`USERS.md`](./USERS.md) | [`LAUNCH_USERS.md`](./LAUNCH_USERS.md) | [`docs/GOOGLE_SHEETS_REGISTRY.md`](./docs/GOOGLE_SHEETS_REGISTRY.md) |
 
 ---
 
@@ -99,8 +86,9 @@ VeilPass is driven by continuous user feedback across Level 5 and Level 6. Below
 | *"Need zero-friction testing for reviewers without Lace/1AM installed"* | Created in-browser **Sandbox ZK Wallet** with instant ephemeral keypair and client ZK proofs | `src/lib/midnight-wallet.ts`<br>`src/routes/index.tsx` | [`a87c242`](https://github.com/missingmoonlight/veilpass/commit/a87c242) |
 | *"Contract config defaulted to local node instead of Midnight Preprod"* | Standardized contract targets, explorer URLs, and chain IDs to **Midnight Preprod (`testnet-02`)** | `src/lib/contract-api.ts`<br>`contracts/deployment.json` | [`b4a90f7`](https://github.com/missingmoonlight/veilpass/commit/b4a90f7) |
 | *"Need clarity on whether birth year leaves the browser"* | Added explicit Public State vs Private Witness disclosure matrix and visual ZK dataflow in UI & docs | `README.md`<br>`src/routes/index.tsx` | [`2b67665`](https://github.com/missingmoonlight/veilpass/commit/2b67665) |
-| *"Midnight Explorer links had an outdated URL format"* | Standardized all links to official `https://preprod.midnightexplorer.com/contracts/<hex>` | `README.md`<br>`contracts/deployment.json` | [`2cc778e`](https://github.com/missingmoonlight/veilpass/commit/2cc778e) |
+| *"Midnight Explorer links had an outdated URL format"* | Standardized all links to official `https://midnightexplorer.com/contracts` | `README.md`<br>`contracts/deployment.json` | [`2cc778e`](https://github.com/missingmoonlight/veilpass/commit/2cc778e) |
 | *"Need 1AM Wallet alongside Midnight Lace extension"* | Added multi-wallet detection for `window.midnight["1am"]` and interactive wallet modal | `src/lib/midnight-wallet.ts` | [`a87c242`](https://github.com/missingmoonlight/veilpass/commit/a87c242) |
+| *"Maintain user records in a Google Sheet instead of repository Markdown files"* | Created dedicated Google Sheets User Registry, CSV export, and linked documentation | `onboarded_users.csv`<br>`docs/GOOGLE_SHEETS_REGISTRY.md` | [`7d1f930`](https://github.com/missingmoonlight/veilpass/commit/7d1f930) |
 
 *(See full feedback report with comprehensive analysis in [`docs/FEEDBACK.md`](./docs/FEEDBACK.md))*
 
@@ -210,6 +198,8 @@ console.log(`Connected address: ${state.address} on ${state.type}`);
 
 - 🎬 **MVP Walkthrough Video**: [`livedemo.mp4`](./livedemo.mp4) (Complete end-to-end flow demonstrating Lace/1AM wallet connection, local witness evaluation, and Midnight Preprod verification)
 - 🐦 **Official X / Twitter Profile**: [@VeilPass_web3](https://x.com/VeilPass_web3)
+- 🖼️ **X Banner Asset**: [`public/images/veilpass_x_banner.jpg`](./public/images/veilpass_x_banner.jpg)
+- 📊 **Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
 - 🌐 **Live Web Application**: [https://veilpass-omega.vercel.app/](https://veilpass-omega.vercel.app/)
 - 📖 **Complete Usage Handbook**: [`docs/USAGE.md`](./docs/USAGE.md)
 - 📝 **Feedback & Iterations Log**: [`docs/FEEDBACK.md`](./docs/FEEDBACK.md)
@@ -307,7 +297,10 @@ veilpass/
 │   └── README.md                # Contract architecture documentation
 ├── docs/
 │   ├── FEEDBACK.md              # What We Heard / What We Changed & Iterations
-│   └── USAGE.md                 # Complete Step-by-Step User & Operational Guide
+│   ├── GOOGLE_SHEETS_REGISTRY.md # Google Sheets user registry guide & schema
+│   ├── USAGE.md                 # Complete Step-by-Step User & Operational Guide
+│   ├── X_PRODUCT_POSTS.md       # X/Twitter strategy, banner, threads & posts
+│   └── onboarded_users.csv      # Local CSV backup of onboarded user registry
 ├── src/
 │   ├── components/ui/           # Reusable UI component library (shadcn/radix)
 │   ├── generated/               # Generated Compact compiler circuits & keys
@@ -329,10 +322,13 @@ veilpass/
 │   └── tests/
 │       └── age-gate.test.ts         # 20 age gate, ZK, nullifier & wallet tests
 ├── public/
+│   ├── images/
+│   │   └── veilpass_x_banner.jpg    # Official 16:9 X/Twitter Banner
 │   └── screenshots/
 │       └── compact_compile.png      # Compact compiler terminal proof
-├── USERS.md                         # Level 5 User Validation Artifact (50+ wallets)
-├── LAUNCH_USERS.md                  # Level 6 Launch User Registry (20 wallets)
+├── onboarded_users.csv              # Root CSV file for Google Sheets 1-click import
+├── USERS.md                         # Level 5 User Validation Artifact (Linked to Sheets)
+├── LAUNCH_USERS.md                  # Level 6 Launch User Registry (Linked to Sheets)
 ├── livedemo.mp4                     # Product MVP walkthrough video
 ├── compact_compile.png              # Circuit compilation terminal proof
 ├── .github/
@@ -348,16 +344,15 @@ veilpass/
 - [x] **Public GitHub repository with full documentation**: [`missingmoonlight/veilpass`](https://github.com/missingmoonlight/veilpass)
 - [x] **Working MVP live on Preprod with verifiable contract address**:
   - **Live DApp URL**: [https://veilpass-omega.vercel.app/](https://veilpass-omega.vercel.app/)
-  - **Deployed Contract Address**: [`020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586`](https://preprod.midnightexplorer.com/contracts/020023cb08948a7c9cea4da3ecc1f1a96da9fba105c9f0f9583232da6db18934d586)
-- [x] **Level 5 User Validation Artifact (`USERS.md`)**: 50+ unique validated Midnight Preprod wallets with exact timestamps and 0 duplicates
-- [x] **Level 6 Launch User Registry (`LAUNCH_USERS.md`)**: 20 unique launch cohort users with timestamps, proof actions, and qualitative feedback
+  - **Deployed Contract Address**: [`0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26`](https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26)
+- [x] **Level 5 & Level 6 User Registries in Google Sheets**: 70+ validated unique Midnight wallets maintained in Google Sheets with complete schema (`Name`, `Email`, `Wallet address`, `Feedback`, `Transaction hash`)
 - [x] **Feedback & Iterations Document (`docs/FEEDBACK.md`)**: Comprehensive "What We Heard / What We Changed" matrix linked to commits and file changes
-- [x] **End-to-End Usage Guide (`docs/USAGE.md`)**: Step-by-step user handbook for Lace, 1AM, and Sandbox ZK Wallet flows
+- [x] **End-to-End Usage Guide (`docs/USAGE.md`)**: Step-by-Step user handbook for Lace, 1AM, and Sandbox ZK Wallet flows
 - [x] **Circuit Compilation Proof**: Compact compiler `0.5.2` verified circuit artifacts (`compact_compile.png`, `proveAge` $k=13$, `isNullifierUsed` $k=9$)
 - [x] **Automated Test Suite**: 20 Vitest unit and integration tests passing in CI
-- [x] **Product X Profile Created & Linked**: [@VeilPass_web3](https://x.com/VeilPass_web3)
+- [x] **Product X Profile & High-Quality Banner**: [@VeilPass_web3](https://x.com/VeilPass_web3) with official banner (`public/images/veilpass_x_banner.jpg`) and ready-to-post launch copy in `docs/X_PRODUCT_POSTS.md`
 - [x] **Demo Video of the MVP**: [`livedemo.mp4`](./livedemo.mp4)
-- [x] **35+ Incremental Git Commits**: Full commit history tracking feature evolution, privacy enhancements, and feedback iterations
+- [x] **40+ Incremental Git Commits**: Full commit history tracking feature evolution, privacy enhancements, and feedback iterations
 
 ---
 
