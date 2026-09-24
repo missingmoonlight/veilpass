@@ -14,8 +14,8 @@ import { Check, ExternalLink, MessageSquareText, Send, Sparkles } from "lucide-r
 interface FeedbackModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  walletAddress?: string;
-  txHash?: string;
+  walletAddress?: string | undefined;
+  txHash?: string | undefined;
 }
 
 export function FeedbackModal({
