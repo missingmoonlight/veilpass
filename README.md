@@ -69,7 +69,7 @@ Per Level 5 & Level 6 reviewer guidelines, all individual onboarded user records
 
 - 📝 **Submit Tester Feedback (Google Form)**: [VeilPass Participant Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)
 - 🔗 **Google Sheet Live Registry**: [Open VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
-- 📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Wallet address`, `Feedback`, `Transaction hash`, `Timestamp`, `Method`, `Status`)
+- 📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Feedback`)
 - 🌐 **In-dApp Interactive Viewer**: Available directly on the [VeilPass Web App](https://veilpass-omega.vercel.app/) under tab *"User Registry & Sheets"*.
 
 ### Cohort Summary Metrics

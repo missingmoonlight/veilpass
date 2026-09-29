@@ -106,16 +106,11 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
   }, [users, search, statusFilter]);
 
   const exportCSV = () => {
-    const headers = ["Name", "Email", "Wallet address", "Feedback", "Transaction hash", "Timestamp (UTC)", "Method", "Status"];
+    const headers = ["Name", "Email", "Feedback"];
     const rows = filteredUsers.map((u) => [
       `"${u.name}"`,
       `"${u.email}"`,
-      `"${u.walletAddress}"`,
       `"${u.feedback.replace(/"/g, '""')}"`,
-      `"${u.txHash}"`,
-      `"${u.timestamp}"`,
-      `"${u.method}"`,
-      `"${u.status}"`,
     ]);
     const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
     const encodedUri = encodeURI(csvContent);
@@ -262,7 +257,7 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
         {/* Footer info */}
         <div className="border-t border-border/80 bg-secondary/20 p-3 px-5 flex flex-wrap items-center justify-between text-xs text-muted-foreground">
           <span>
-            Database schema: <code className="font-mono text-[11px] text-foreground">Name, Email, Wallet address, Feedback, Transaction hash, Timestamp, Status</code>
+            CSV export schema: <code className="font-mono text-[11px] text-foreground">Name, Email, Feedback</code>
           </span>
           <a
             href="https://github.com/missingmoonlight/veilpass/blob/main/onboarded_users.csv"
