@@ -6,12 +6,12 @@
 [![Built with Midnight](https://img.shields.io/badge/Built%20with-Midnight%20Network-6C47FF?style=flat)](https://midnight.network)
 [![X Profile](https://img.shields.io/badge/X-@VeilPass__web3-black?logo=x)](https://x.com/VeilPass_web3)
 [![Feedback Form](https://img.shields.io/badge/Google%20Form-Submit%20Feedback-purple)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)
-[![Google Sheets Registry](https://img.shields.io/badge/Google%20Sheets-User%20Registry%20(70%2B)-success)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+[![Google Sheets Registry](https://img.shields.io/badge/Google%20Sheets-User%20Registry%20(70%2B)-success)](https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing)
 [![Launch Status](https://img.shields.io/badge/Launch%20Status-Preprod%20Live-blue)](https://veilpass-omega.vercel.app/)
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://veilpass-omega.vercel.app/) · [Submit Feedback (Google Form)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor) · [Google Sheets Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing) · [CSV User Export](./onboarded_users.csv) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [X / Twitter](https://x.com/VeilPass_web3)
+[Live Demo](https://veilpass-omega.vercel.app/) · [Submit Feedback (Google Form)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor) · [Google Sheets Registry](https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing) · [CSV User Export](./onboarded_users.csv) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [X / Twitter](https://x.com/VeilPass_web3)
 
 </div>
 
@@ -68,7 +68,7 @@ Terminal output verifying successful `AgeGate.compact` compilation and generated
 Per Level 5 & Level 6 reviewer guidelines, all individual onboarded user records are maintained in an external **Google Sheet** and collected via our official **Google Form**:
 
 - 📝 **Submit Tester Feedback (Google Form)**: [VeilPass Participant Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)
-- 🔗 **Google Sheet Live Registry**: [Open VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+- 🔗 **Google Sheet Live Registry**: [Open VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing)
 - 📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Feedback`)
 - 🌐 **In-dApp Interactive Viewer**: Available directly on the [VeilPass Web App](https://veilpass-omega.vercel.app/) under tab *"User Registry & Sheets"*.
 
@@ -207,7 +207,7 @@ console.log(`Connected address: ${state.address} on ${state.type}`);
 - 🎬 **MVP Walkthrough Video**: [`livedemo.mp4`](./livedemo.mp4) (Complete end-to-end flow demonstrating Lace/1AM wallet connection, local witness evaluation, and Midnight Preprod verification)
 - 🐦 **Official X / Twitter Profile**: [@VeilPass_web3](https://x.com/VeilPass_web3)
 - 🖼️ **X Banner Asset**: [`public/images/veilpass_x_banner.jpg`](./public/images/veilpass_x_banner.jpg)
-- 📊 **Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+- 📊 **Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing)
 - 🌐 **Live Web Application**: [https://veilpass-omega.vercel.app/](https://veilpass-omega.vercel.app/)
 - 📖 **Complete Usage Handbook**: [`docs/USAGE.md`](./docs/USAGE.md)
 - 📝 **Feedback & Iterations Log**: [`docs/FEEDBACK.md`](./docs/FEEDBACK.md)

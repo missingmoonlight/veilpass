@@ -18,7 +18,7 @@ This document records the user feedback, developer testing insights, and iterati
 Participants and testnet reviewers can submit qualitative reviews, issue reports, and verification logs through multiple channels:
 
 1. 📝 **Official Google Form**: [VeilPass Participant Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor) (Primary intake form)
-2. 🔗 **Live Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+2. 🔗 **Live Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing)
 3. 🌐 **In-dApp Interactive Table**: Directly in the web app under tab *"User Registry & Sheets"* with 1-click CSV export.
 
 ---

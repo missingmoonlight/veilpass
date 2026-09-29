@@ -166,7 +166,7 @@ export function FeedbackModal({
                 </a>
                 <span className="text-border text-xs">|</span>
                 <a
-                  href="https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing"
+                  href="https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition"

@@ -150,6 +150,16 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
           </Button>
 
           <a
+            href="https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md text-xs font-medium border border-border bg-card text-muted-foreground hover:text-primary transition"
+          >
+            <ExternalLink className="size-3.5 text-primary" />
+            <span>Google Sheet</span>
+          </a>
+
+          <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor"
             target="_blank"
             rel="noreferrer"
