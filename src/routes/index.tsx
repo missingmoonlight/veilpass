@@ -40,6 +40,7 @@ import { WalletModal } from "@/components/wallet-modal";
 import { FeedbackModal } from "@/components/feedback-modal";
 import { GoogleSheetViewer } from "@/components/google-sheet-viewer";
 import { CircuitInspector } from "@/components/circuit-inspector";
+import { Velaris } from "@/components/ui/velaris";
 import { useMidnightWallet } from "@/hooks/use-midnight-wallet";
 import {
   createAgeProof,
@@ -239,8 +240,20 @@ function Index() {
   };
 
   return (
-    <main className="min-h-screen bg-[#08090d] text-foreground selection:bg-primary/30 selection:text-primary">
-      {/* Wallet Selector Modal */}
+    <main className="min-h-screen relative bg-[#08090d] text-foreground selection:bg-primary/30 selection:text-primary">
+      <Velaris
+        className="min-h-screen"
+        speed={0.45}
+        intensity={0.85}
+        noiseScale={1.6}
+        grainAmount={0.02}
+        primaryColor="#6C47FF"
+        secondaryColor="#00E5FF"
+        accentColor="#A855F7"
+        backgroundColor="#08090d"
+        interactive={true}
+      >
+        {/* Wallet Selector Modal */}
       <WalletModal
         open={walletModalOpen}
         onOpenChange={setWalletModalOpen}
@@ -785,6 +798,7 @@ function Index() {
           </div>
         </div>
       </footer>
+      </Velaris>
     </main>
   );
 }
