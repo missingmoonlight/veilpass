@@ -4,10 +4,11 @@ As per Level 5 & Level 6 review instructions, all participant and onboarded user
 
 ---
 
-## 📊 Live Google Sheet Registry
+## 📊 Live Google Sheet & In-dApp Interactive Registry
 
-🔗 **Live Google Sheet Link**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)  
-*(Exported backup data is also maintained locally in [`onboarded_users.csv`](../onboarded_users.csv))*
+1. 🌐 **In-dApp Interactive Viewer**: Open the [VeilPass Web App](https://veilpass-omega.vercel.app/) and navigate to the **"User Registry & Sheets"** tab for an interactive, searchable data grid with live filtering, Midnight Explorer tx links, and direct CSV download.
+2. 🔗 **Live Google Sheet Link**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)  
+3. 📁 **Local CSV Dataset**: [`onboarded_users.csv`](../onboarded_users.csv) (Maintained in repository root for offline analysis and 1-click import).
 
 ---
 

@@ -19,11 +19,18 @@
 
 ## 🎨 X (Twitter) Profile & Brand Assets
 
-VeilPass maintains an active public presence on X / Twitter at **[@VeilPass_web3](https://x.com/VeilPass_web3)**:
+VeilPass maintains an active public presence on X / Twitter at **[@VeilPass_web3](https://x.com/VeilPass_web3)** with custom handcrafted vector identity:
 
-![VeilPass X Profile Banner](public/images/veilpass_x_banner.jpg)
+<div align="center">
 
-- 🖼️ **Official Profile Banner**: [`public/images/veilpass_x_banner.jpg`](./public/images/veilpass_x_banner.jpg) (16:9 / 1500x500 Cyberpunk ZK Theme)
+| Handcrafted Vector Logo | Vector Icon Avatar | 1500x500 X Banner |
+|:---:|:---:|:---:|
+| [`public/brand/logo.svg`](./public/brand/logo.svg) | [`public/brand/avatar.svg`](./public/brand/avatar.svg) | [`public/brand/x-banner.svg`](./public/brand/x-banner.svg) |
+
+</div>
+
+- 🖼️ **Official Profile Banner**: [`public/brand/x-banner.svg`](./public/brand/x-banner.svg) (1500x500 Vector / Cyber-Obsidian ZK Aesthetic)
+- 🛡️ **Brand Vector Icon**: [`public/brand/logo.svg`](./public/brand/logo.svg) & [`public/favicon.svg`](./public/favicon.svg)
 - 🐦 **Profile Handle**: [@VeilPass_web3](https://x.com/VeilPass_web3)
 - 📢 **Launch Threads & Product Posts**: See [`docs/X_PRODUCT_POSTS.md`](./docs/X_PRODUCT_POSTS.md) for master announcement threads, technical deep-dives, privacy explainers, and community engagement posts.
 
