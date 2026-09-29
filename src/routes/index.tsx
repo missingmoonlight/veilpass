@@ -271,22 +271,22 @@ function Index() {
       />
 
       {/* ── Navbar ──────────────────────────────────────────────────────────── */}
-      <header className="border-b border-border/60 bg-[#08090d]/80 backdrop-blur-xl sticky top-0 z-40">
+      <header className="border-b border-white/10 bg-black/60 backdrop-blur-2xl sticky top-0 z-40 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-6">
             <BrandLogo size={34} />
 
-            <div className="hidden md:flex items-center gap-1.5 rounded-full border border-border/80 bg-secondary/30 p-1 text-xs">
-              <span className="flex items-center gap-1.5 px-2.5 py-0.5 text-muted-foreground font-mono text-[11px]">
+            <div className="hidden md:flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] p-1 text-xs backdrop-blur-md">
+              <span className="flex items-center gap-1.5 px-2.5 py-0.5 text-slate-300 font-mono text-[11px]">
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
                 Midnight Preprod
               </span>
-              <span className="text-border">|</span>
+              <span className="text-white/20">|</span>
               <a
                 href="https://midnightexplorer.com/blocks/2724863"
                 target="_blank"
                 rel="noreferrer"
-                className="px-2 py-0.5 font-mono text-[11px] text-primary hover:underline"
+                className="px-2 py-0.5 font-mono text-[11px] text-cyan-400 hover:text-cyan-300 transition hover:underline"
               >
                 Block #2,724,863
               </a>
@@ -298,30 +298,30 @@ function Index() {
               variant="outline"
               size="sm"
               onClick={() => setFeedbackModalOpen(true)}
-              className="h-9 gap-1.5 text-xs text-muted-foreground hover:text-foreground border-border bg-card/60"
+              className="h-9 gap-1.5 text-xs text-slate-200 hover:text-white border-white/15 bg-white/[0.05] hover:bg-white/[0.1] backdrop-blur-md transition shadow-sm"
             >
-              <MessageSquareText className="size-3.5 text-primary" />
-              <span className="hidden sm:inline">User Feedback</span>
+              <MessageSquareText className="size-3.5 text-cyan-400" />
+              <span className="hidden sm:inline font-medium">User Feedback</span>
             </Button>
 
             {walletState?.isConnected ? (
               <Button
                 variant="outline"
-                className="h-9 gap-2 bg-card border-primary/40 shadow-sm text-xs"
+                className="h-9 gap-2 bg-black/70 border-cyan-500/40 text-white shadow-[0_0_15px_rgba(0,229,255,0.15)] text-xs backdrop-blur-md"
                 onClick={disconnectWallet}
               >
-                <span className="size-2 rounded-full bg-primary animate-pulse" />
+                <span className="size-2 rounded-full bg-cyan-400 animate-pulse" />
                 <span className="font-mono text-xs">
                   [{walletState.type.toUpperCase()}] {walletState.displayAddress}
                 </span>
-                <Unplug className="size-3.5 text-muted-foreground hover:text-destructive transition" />
+                <Unplug className="size-3.5 text-slate-400 hover:text-destructive transition" />
               </Button>
             ) : isConnecting ? (
               <Button className="h-9 text-xs" disabled>
                 <LoaderCircle className="animate-spin size-3.5" /> Connecting…
               </Button>
             ) : (
-              <Button className="h-9 text-xs gap-1.5 bg-primary text-primary-foreground shadow-sm" onClick={() => setWalletModalOpen(true)}>
+              <Button className="h-9 text-xs gap-1.5 bg-gradient-to-r from-primary to-cyan-500 text-white font-semibold shadow-[0_0_20px_rgba(108,71,255,0.4)] hover:opacity-95 transition" onClick={() => setWalletModalOpen(true)}>
                 <WalletCards className="size-3.5" /> Connect Wallet
               </Button>
             )}
@@ -333,18 +333,18 @@ function Index() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Navigation Tabs Bar */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex items-center justify-between border-b border-border/80 pb-4 mb-8">
-            <TabsList className="bg-secondary/40 border border-border/70 p-1 rounded-xl">
-              <TabsTrigger value="prover" className="gap-2 text-xs sm:text-sm px-4">
-                <LockKeyhole className="size-4 text-primary" />
+          <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
+            <TabsList className="bg-black/60 border border-white/15 p-1.5 rounded-2xl backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+              <TabsTrigger value="prover" className="gap-2 text-xs sm:text-sm px-4 data-[state=active]:bg-primary/30 data-[state=active]:text-white data-[state=active]:border-primary/40 text-slate-300 font-semibold transition">
+                <LockKeyhole className="size-4 text-cyan-400" />
                 <span>ZK Age Gate</span>
               </TabsTrigger>
-              <TabsTrigger value="registry" className="gap-2 text-xs sm:text-sm px-4">
-                <TableProperties className="size-4 text-primary" />
+              <TabsTrigger value="registry" className="gap-2 text-xs sm:text-sm px-4 data-[state=active]:bg-primary/30 data-[state=active]:text-white data-[state=active]:border-primary/40 text-slate-300 font-semibold transition">
+                <TableProperties className="size-4 text-cyan-400" />
                 <span>User Registry &amp; Sheets</span>
               </TabsTrigger>
-              <TabsTrigger value="circuits" className="gap-2 text-xs sm:text-sm px-4">
-                <Cpu className="size-4 text-primary" />
+              <TabsTrigger value="circuits" className="gap-2 text-xs sm:text-sm px-4 data-[state=active]:bg-primary/30 data-[state=active]:text-white data-[state=active]:border-primary/40 text-slate-300 font-semibold transition">
+                <Cpu className="size-4 text-cyan-400" />
                 <span>Circuit &amp; SDK</span>
               </TabsTrigger>
             </TabsList>
@@ -353,10 +353,10 @@ function Index() {
               href="https://midnightexplorer.com/contracts/0xfc349dbb1d9626c7cde694c45563c0faefaaea12141b510f5cb977b9e6160d26"
               target="_blank"
               rel="noreferrer"
-              className="hidden lg:inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition font-mono"
+              className="hidden lg:inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 transition font-mono bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-md shadow-sm"
             >
               <span>Contract: 0xfc349d...0d26</span>
-              <ExternalLink className="size-3" />
+              <ExternalLink className="size-3 text-cyan-400" />
             </a>
           </div>
 
@@ -366,63 +366,63 @@ function Index() {
               {/* Left Column: Hero & Privacy Architecture */}
               <div className="space-y-6">
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-primary mb-4">
-                    <Sparkles className="size-3.5" /> Midnight Compact Zero-Knowledge
+                  <div className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-cyan-950/40 px-3.5 py-1 font-mono text-[11px] uppercase tracking-wider text-cyan-300 backdrop-blur-md shadow-[0_0_15px_rgba(0,229,255,0.15)] mb-4">
+                    <Sparkles className="size-3.5 text-cyan-400" /> Midnight Compact Zero-Knowledge
                   </div>
-                  <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground leading-[1.08]">
+                  <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-white leading-[1.08] drop-shadow-[0_2px_18px_rgba(0,0,0,0.8)]">
                     Prove eligibility.<br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-violet-300 to-primary drop-shadow-[0_0_30px_rgba(0,229,255,0.35)]">
                       Keep birthdate private.
                     </span>
                   </h1>
-                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-200/90 font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.7)]">
                     VeilPass executes cryptographic zero-knowledge age verification on Midnight Network.
                     Your birth year witness is evaluated strictly in-memory inside client RAM and discarded immediately — only an unpredictable 32-byte nullifier is recorded on-chain.
                   </p>
                 </div>
 
                 {/* Key Telemetry Badges */}
-                <div className="grid grid-cols-3 border-y border-border/80 py-4 bg-card/40 rounded-xl px-4">
+                <div className="grid grid-cols-3 border border-white/15 py-4.5 bg-black/60 backdrop-blur-2xl rounded-2xl px-5 shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
                   <div>
-                    <div className="font-mono text-base sm:text-lg font-bold text-primary">0 Bytes</div>
-                    <div className="mt-0.5 text-[11px] text-muted-foreground">Personal Data Sent</div>
+                    <div className="font-mono text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white">0 Bytes</div>
+                    <div className="mt-0.5 text-[11px] font-medium text-slate-300/80 uppercase tracking-wider">Personal Data Sent</div>
                   </div>
-                  <div className="border-x border-border/80 px-4">
-                    <div className="font-mono text-base sm:text-lg font-bold text-foreground">
+                  <div className="border-x border-white/10 px-4">
+                    <div className="font-mono text-xl sm:text-2xl font-black text-white">
                       {ledgerState?.verifiedCount ?? 70}+
                     </div>
-                    <div className="mt-0.5 text-[11px] text-muted-foreground">Preprod Verifications</div>
+                    <div className="mt-0.5 text-[11px] font-medium text-slate-300/80 uppercase tracking-wider">Preprod Verifications</div>
                   </div>
                   <div className="pl-4">
-                    <div className="font-mono text-base sm:text-lg font-bold text-primary">{MIN_AGE}+</div>
-                    <div className="mt-0.5 text-[11px] text-muted-foreground">Enforced Rule</div>
+                    <div className="font-mono text-xl sm:text-2xl font-black text-cyan-300">{MIN_AGE}+</div>
+                    <div className="mt-0.5 text-[11px] font-medium text-slate-300/80 uppercase tracking-wider">Enforced Rule</div>
                   </div>
                 </div>
 
                 {/* Privacy Matrix Box */}
-                <div className="rounded-xl border border-border/70 bg-card/30 p-4 space-y-2.5 text-xs">
-                  <div className="flex items-center justify-between text-muted-foreground">
-                    <span className="flex items-center gap-1.5 font-medium text-foreground">
-                      <LockKeyhole className="size-3.5 text-primary" /> Private Witness
+                <div className="rounded-2xl border border-white/15 bg-black/60 backdrop-blur-2xl p-5 space-y-3 text-xs shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2 font-semibold text-white">
+                      <LockKeyhole className="size-3.5 text-cyan-400" /> Private Witness
                     </span>
-                    <span className="font-mono text-primary">localBirthYear (In RAM)</span>
+                    <span className="font-mono font-medium text-cyan-300">localBirthYear (In RAM)</span>
                   </div>
-                  <div className="flex items-center justify-between text-muted-foreground">
-                    <span className="flex items-center gap-1.5 font-medium text-foreground">
-                      <Layers className="size-3.5 text-primary" /> Public Ledger State
+                  <div className="flex items-center justify-between border-t border-white/5 pt-2.5">
+                    <span className="flex items-center gap-2 font-semibold text-white">
+                      <Layers className="size-3.5 text-violet-400" /> Public Ledger State
                     </span>
-                    <span className="font-mono text-foreground">usedNullifiers &amp; verifiedCount</span>
+                    <span className="font-mono text-slate-200">usedNullifiers &amp; verifiedCount</span>
                   </div>
-                  <div className="flex items-center justify-between text-muted-foreground">
-                    <span className="flex items-center gap-1.5 font-medium text-foreground">
-                      <Cpu className="size-3.5 text-primary" /> Circuit Specification
+                  <div className="flex items-center justify-between border-t border-white/5 pt-2.5">
+                    <span className="flex items-center gap-2 font-semibold text-white">
+                      <Cpu className="size-3.5 text-cyan-400" /> Circuit Specification
                     </span>
-                    <span className="font-mono text-muted-foreground">AgeGate.compact (k=13)</span>
+                    <span className="font-mono text-slate-400">AgeGate.compact (k=13)</span>
                   </div>
                 </div>
 
                 {walletError && (
-                  <div className="flex items-start gap-2 rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-xs text-destructive">
+                  <div className="flex items-start gap-2 rounded-xl border border-destructive/40 bg-destructive/15 backdrop-blur-xl p-3.5 text-xs text-destructive">
                     <ShieldAlert className="size-4 shrink-0 mt-0.5" />
                     <span>{walletError}</span>
                   </div>
@@ -430,19 +430,19 @@ function Index() {
               </div>
 
               {/* Right Column: Interactive Prover Card */}
-              <div className="rounded-2xl border border-border/80 bg-card shadow-panel overflow-hidden backdrop-blur-md">
+              <div className="rounded-2xl border border-white/15 bg-black/70 shadow-[0_16px_48px_rgba(0,0,0,0.75)] overflow-hidden backdrop-blur-2xl">
                 {/* Stepper Header */}
-                <div className="border-b border-border/80 bg-secondary/30 px-6 py-4">
+                <div className="border-b border-white/10 bg-white/[0.04] px-6 py-4.5 backdrop-blur-md">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      <div className="text-[11px] font-semibold text-cyan-400 uppercase tracking-wider font-mono">
                         Interactive Prover
                       </div>
-                      <div className="text-sm font-bold text-foreground">
+                      <div className="text-base font-bold text-white">
                         Age Gate Witness Evaluation
                       </div>
                     </div>
-                    <Badge variant="outline" className="border-primary/30 text-primary bg-primary/5 text-[11px] font-mono">
+                    <Badge variant="outline" className="border-cyan-400/40 text-cyan-300 bg-cyan-950/40 text-[11px] font-mono px-2.5 py-0.5 shadow-[0_0_10px_rgba(0,229,255,0.1)]">
                       Threshold: Age ≥ {MIN_AGE}
                     </Badge>
                   </div>
@@ -516,20 +516,20 @@ function Index() {
                   {/* Step 1: Ready / Proving */}
                   {(state === "ready" || state === "proving") && (
                     <div className="space-y-5">
-                      <div className="flex items-center gap-3 border-b border-border/80 pb-3">
-                        <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                          <KeyRound className="size-4" />
+                      <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div className="flex size-9 items-center justify-center rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(0,229,255,0.15)]">
+                          <KeyRound className="size-4.5" />
                         </div>
                         <div>
-                          <h3 className="text-xs font-semibold text-foreground">Client-Side Witness Entry</h3>
-                          <p className="text-[11px] text-muted-foreground">
+                          <h3 className="text-sm font-bold text-white">Client-Side Witness Entry</h3>
+                          <p className="text-[11px] text-slate-300 font-medium">
                             Evaluated strictly inside local RAM · never broadcast to node
                           </p>
                         </div>
                       </div>
 
                       <div>
-                        <label htmlFor="birthYear" className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
+                        <label htmlFor="birthYear" className="block text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 font-mono">
                           Your Birth Year
                         </label>
                         <Input
@@ -541,52 +541,52 @@ function Index() {
                           value={birthYear}
                           onChange={(e) => { setBirthYear(e.target.value); setError(""); }}
                           disabled={busy}
-                          className="h-12 font-mono text-xl bg-background border-border px-4"
+                          className="h-13 font-mono text-2xl font-bold bg-black/60 border-white/20 text-white placeholder:text-slate-500 px-4 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 shadow-inner rounded-xl"
                         />
 
                         {/* Quick Test Presets */}
-                        <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
-                          <span className="text-muted-foreground text-[10px]">Test Presets:</span>
+                        <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+                          <span className="text-slate-400 text-[11px] font-medium">Test Presets:</span>
                           <button
                             type="button"
                             onClick={() => { setBirthYear("1998"); setError(""); }}
-                            className="rounded border border-border/80 bg-secondary/50 px-2 py-0.5 font-mono text-muted-foreground hover:text-foreground hover:border-primary/40 transition"
+                            className="rounded-lg border border-white/15 bg-white/[0.06] hover:bg-white/[0.12] px-2.5 py-1 font-mono text-slate-200 hover:text-white hover:border-cyan-400/40 transition shadow-sm"
                           >
                             1998 (Age 28)
                           </button>
                           <button
                             type="button"
                             onClick={() => { setBirthYear("2004"); setError(""); }}
-                            className="rounded border border-border/80 bg-secondary/50 px-2 py-0.5 font-mono text-muted-foreground hover:text-foreground hover:border-primary/40 transition"
+                            className="rounded-lg border border-white/15 bg-white/[0.06] hover:bg-white/[0.12] px-2.5 py-1 font-mono text-slate-200 hover:text-white hover:border-cyan-400/40 transition shadow-sm"
                           >
                             2004 (Age 22)
                           </button>
                           <button
                             type="button"
                             onClick={() => { setBirthYear("2008"); setError(""); }}
-                            className="rounded border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-primary hover:bg-primary/20 transition"
+                            className="rounded-lg border border-cyan-400/50 bg-cyan-950/50 px-2.5 py-1 font-mono text-cyan-300 font-semibold hover:bg-cyan-900/50 transition shadow-[0_0_10px_rgba(0,229,255,0.15)]"
                           >
                             2008 (Age 18 🛡️)
                           </button>
                           <button
                             type="button"
                             onClick={() => { setBirthYear("2012"); setError(""); }}
-                            className="rounded border border-destructive/40 bg-destructive/10 px-2 py-0.5 font-mono text-destructive hover:bg-destructive/20 transition"
+                            className="rounded-lg border border-destructive/50 bg-destructive/20 px-2.5 py-1 font-mono text-rose-300 font-semibold hover:bg-destructive/30 transition"
                           >
                             2012 (Underage ❌)
                           </button>
                         </div>
 
                         {error && (
-                          <div className="mt-3 flex items-start gap-1.5 p-2.5 rounded-lg border border-destructive/30 bg-destructive/10 text-xs text-destructive">
-                            <ShieldAlert className="size-3.5 shrink-0 mt-0.5" />
+                          <div className="mt-3.5 flex items-start gap-2 p-3 rounded-xl border border-destructive/50 bg-destructive/15 text-xs text-rose-200 backdrop-blur-md">
+                            <ShieldAlert className="size-4 shrink-0 mt-0.5 text-rose-400" />
                             <span>{error}</span>
                           </div>
                         )}
                       </div>
 
                       <Button
-                        className="h-11 w-full text-xs font-semibold bg-primary text-primary-foreground shadow-md gap-2"
+                        className="h-12 w-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-primary via-violet-600 to-cyan-500 text-white shadow-[0_0_25px_rgba(108,71,255,0.45)] hover:shadow-[0_0_35px_rgba(0,229,255,0.6)] hover:opacity-95 transition gap-2 rounded-xl"
                         disabled={!birthYear || busy}
                         onClick={generateProof}
                       >
@@ -596,7 +596,7 @@ function Index() {
                           </>
                         ) : (
                           <>
-                            <Zap className="size-4" /> Generate ZK Proof
+                            <Zap className="size-4 text-cyan-300" /> Generate ZK Proof
                           </>
                         )}
                       </Button>
@@ -606,51 +606,51 @@ function Index() {
                   {/* Step 2: Proved */}
                   {state === "proved" && proof && (
                     <div className="space-y-4">
-                      <div className="flex items-center gap-3 border-b border-border/80 pb-3">
-                        <div className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                          <Check className="size-4" />
+                      <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div className="flex size-9 items-center justify-center rounded-xl bg-cyan-500 text-black font-bold shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+                          <Check className="size-5" />
                         </div>
                         <div>
-                          <h3 className="text-xs font-semibold text-foreground">Proof Generated Locally</h3>
-                          <p className="text-[11px] text-muted-foreground">
+                          <h3 className="text-sm font-bold text-white">Proof Generated Locally</h3>
+                          <p className="text-[11px] text-slate-300 font-medium">
                             Witness verified &amp; wiped from device memory
                           </p>
                         </div>
                       </div>
 
-                      <div className="p-3.5 rounded-lg border border-primary/30 bg-primary/5 space-y-2 text-xs">
+                      <div className="p-4 rounded-xl border border-cyan-500/30 bg-black/60 backdrop-blur-xl space-y-2.5 text-xs shadow-inner">
                         <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">ZK Circuit:</span>
-                          <span className="font-mono font-semibold text-foreground">proveAge (k=13)</span>
+                          <span className="text-slate-300 font-medium">ZK Circuit:</span>
+                          <span className="font-mono font-bold text-white">proveAge (k=13)</span>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Generated Nullifier:</span>
-                          <span className="font-mono text-primary">{shorten(proof.nullifier, 10, 8)}</span>
+                        <div className="flex items-center justify-between border-t border-white/5 pt-2">
+                          <span className="text-slate-300 font-medium">Generated Nullifier:</span>
+                          <span className="font-mono text-cyan-300 font-semibold">{shorten(proof.nullifier, 10, 8)}</span>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Constraint Status:</span>
-                          <span className="font-mono text-primary font-bold flex items-center gap-1">
-                            <CheckCircle2 className="size-3" /> SATISFIED (Age ≥ 18)
+                        <div className="flex items-center justify-between border-t border-white/5 pt-2">
+                          <span className="text-slate-300 font-medium">Constraint Status:</span>
+                          <span className="font-mono text-cyan-300 font-bold flex items-center gap-1">
+                            <CheckCircle2 className="size-3.5 text-cyan-400" /> SATISFIED (Age ≥ 18)
                           </span>
                         </div>
                       </div>
 
                       {error && (
-                        <div className="p-2.5 rounded border border-destructive/30 bg-destructive/10 text-xs text-destructive">
+                        <div className="p-3 rounded-xl border border-destructive/40 bg-destructive/15 text-xs text-rose-200">
                           {error}
                         </div>
                       )}
 
-                      <div className="space-y-2 pt-2">
+                      <div className="space-y-2.5 pt-2">
                         <Button
-                          className="h-10 w-full text-xs font-semibold bg-primary text-primary-foreground gap-1.5"
+                          className="h-11 w-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-cyan-500 text-white shadow-[0_0_25px_rgba(108,71,255,0.4)] hover:opacity-95 gap-2 rounded-xl"
                           onClick={submitProof}
                         >
                           Submit Proof to Midnight Ledger <ChevronRight className="size-4" />
                         </Button>
                         <Button
                           variant="ghost"
-                          className="h-8 w-full text-xs text-muted-foreground hover:text-foreground"
+                          className="h-8 w-full text-xs text-slate-400 hover:text-white"
                           onClick={reset}
                         >
                           Cancel / Re-enter
@@ -662,18 +662,18 @@ function Index() {
                   {/* Step 3: Submitting */}
                   {state === "submitting" && (
                     <div className="text-center py-6 space-y-4">
-                      <div className="relative flex size-16 mx-auto items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
-                        <div className="absolute inset-0 rounded-full border border-primary/30 animate-ping" />
-                        <CircleDot className="size-6 animate-pulse" />
+                      <div className="relative flex size-16 mx-auto items-center justify-center rounded-2xl border border-cyan-400/40 bg-cyan-950/50 text-cyan-400 shadow-[0_0_25px_rgba(0,229,255,0.3)]">
+                        <div className="absolute inset-0 rounded-2xl border border-cyan-400/40 animate-ping" />
+                        <CircleDot className="size-7 animate-pulse" />
                       </div>
                       <div>
-                        <h3 className="text-base font-bold text-foreground">Verifying On Midnight Preprod</h3>
-                        <p className="mt-1 text-xs text-muted-foreground max-w-xs mx-auto">
+                        <h3 className="text-lg font-bold text-white">Verifying On Midnight Preprod</h3>
+                        <p className="mt-1 text-xs text-slate-300 max-w-xs mx-auto">
                           Inserting 32-byte nullifier to on-chain set &amp; incrementing public counter.
                         </p>
                       </div>
-                      <div className="inline-flex items-center gap-2 font-mono text-[11px] text-primary bg-primary/10 px-3 py-1 rounded-full">
-                        <LoaderCircle className="size-3.5 animate-spin" /> Broadcasting balanced transaction…
+                      <div className="inline-flex items-center gap-2 font-mono text-[11px] text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-3.5 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+                        <LoaderCircle className="size-3.5 animate-spin text-cyan-400" /> Broadcasting balanced transaction…
                       </div>
                     </div>
                   )}
@@ -681,12 +681,12 @@ function Index() {
                   {/* Step 4: Verified */}
                   {state === "verified" && (
                     <div className="text-center py-4 space-y-4">
-                      <div className="flex size-14 mx-auto items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg">
+                      <div className="flex size-15 mx-auto items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-primary text-black font-extrabold shadow-[0_0_30px_rgba(0,229,255,0.5)]">
                         <CheckCircle2 className="size-8" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-foreground">Age Verified On-Chain</h3>
-                        <p className="mt-1 text-xs text-muted-foreground max-w-xs mx-auto">
+                        <h3 className="text-xl font-extrabold text-white">Age Verified On-Chain</h3>
+                        <p className="mt-1 text-xs text-slate-300 max-w-xs mx-auto">
                           Eligibility confirmed on Midnight consensus. Zero personal data was exposed.
                         </p>
                       </div>
@@ -696,17 +696,17 @@ function Index() {
                           variant="secondary"
                           size="sm"
                           onClick={copyTransaction}
-                          className="h-8 font-mono text-[11px] gap-1.5 text-muted-foreground"
+                          className="h-8.5 font-mono text-[11px] gap-1.5 bg-black/60 border border-white/15 text-slate-200 hover:text-white"
                         >
                           {shorten(txHash, 8, 6)}
-                          {copied ? <Check className="size-3 text-primary" /> : <Copy className="size-3" />}
+                          {copied ? <Check className="size-3 text-cyan-400" /> : <Copy className="size-3" />}
                         </Button>
 
                         <Button
                           variant="outline"
                           size="sm"
                           asChild
-                          className="h-8 text-xs text-primary gap-1"
+                          className="h-8.5 text-xs text-cyan-300 hover:text-cyan-200 border-cyan-500/40 bg-cyan-950/40 gap-1"
                         >
                           <a
                             href={`https://midnightexplorer.com/transactions/${txHash}`}
@@ -721,23 +721,23 @@ function Index() {
                           variant="outline"
                           size="sm"
                           onClick={downloadCredential}
-                          className="h-8 text-xs text-muted-foreground hover:text-foreground gap-1"
+                          className="h-8.5 text-xs text-slate-200 hover:text-white border-white/15 bg-white/[0.05] gap-1"
                         >
-                          <Download className="size-3" /> Certificate
+                          <Download className="size-3 text-cyan-400" /> Certificate
                         </Button>
                       </div>
 
                       <div className="pt-2 flex flex-col gap-2 max-w-xs mx-auto">
                         <Button
                           variant="outline"
-                          className="h-9 text-xs gap-1.5 bg-background"
+                          className="h-9.5 text-xs font-semibold gap-1.5 bg-white/[0.06] border-white/15 text-white hover:bg-white/[0.12] transition rounded-xl"
                           onClick={reset}
                         >
                           <RotateCcw className="size-3.5" /> Create Another Proof
                         </Button>
                         <Button
                           variant="ghost"
-                          className="h-8 text-xs text-primary gap-1.5"
+                          className="h-8 text-xs text-cyan-400 hover:text-cyan-300 gap-1.5"
                           onClick={() => setFeedbackModalOpen(true)}
                         >
                           <MessageSquareText className="size-3.5" /> Submit User Feedback

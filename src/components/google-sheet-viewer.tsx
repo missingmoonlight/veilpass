@@ -125,15 +125,15 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
   return (
     <div className="space-y-4">
       {/* Controls Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-card/60 p-4 rounded-xl border border-border/70 backdrop-blur-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-black/60 p-4 rounded-2xl border border-white/15 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
         <div className="flex flex-1 items-center gap-2.5 w-full sm:max-w-md">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
+            <Search className="absolute left-3.5 top-3 size-4 text-cyan-400" />
             <Input
               placeholder="Search by name, address, email, tx hash, or feedback..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-9 pl-9 text-xs bg-background"
+              className="h-10 pl-10 text-xs bg-black/50 border-white/15 text-white placeholder:text-slate-500 rounded-xl focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/20"
             />
           </div>
         </div>
@@ -143,9 +143,9 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
             variant="outline"
             size="sm"
             onClick={exportCSV}
-            className="h-9 gap-1.5 text-xs text-muted-foreground hover:text-foreground bg-background"
+            className="h-9 gap-1.5 text-xs text-slate-200 hover:text-white border-white/15 bg-white/[0.05] hover:bg-white/[0.1] rounded-xl transition"
           >
-            <Download className="size-3.5 text-primary" />
+            <Download className="size-3.5 text-cyan-400" />
             <span>Export CSV</span>
           </Button>
 
@@ -153,9 +153,9 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
             href="https://docs.google.com/spreadsheets/d/1Y0GVZ3SYK5_-XaFaEWa_HGAEPi08p59cEAfOXt30HIw/edit?usp=sharing"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md text-xs font-medium border border-border bg-card text-muted-foreground hover:text-primary transition"
+            className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl text-xs font-semibold border border-cyan-400/30 bg-cyan-950/40 text-cyan-300 hover:bg-cyan-900/50 transition shadow-[0_0_12px_rgba(0,229,255,0.15)]"
           >
-            <ExternalLink className="size-3.5 text-primary" />
+            <ExternalLink className="size-3.5 text-cyan-400" />
             <span>Google Sheet</span>
           </a>
 
@@ -163,9 +163,9 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
             href="https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md text-xs font-medium border border-border bg-card text-muted-foreground hover:text-primary transition"
+            className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-xl text-xs font-semibold border border-purple-400/30 bg-purple-950/40 text-purple-300 hover:bg-purple-900/50 transition shadow-[0_0_12px_rgba(168,85,247,0.15)]"
           >
-            <ExternalLink className="size-3.5 text-primary" />
+            <ExternalLink className="size-3.5 text-purple-400" />
             <span>Google Form</span>
           </a>
 
@@ -173,7 +173,7 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
             <Button
               size="sm"
               onClick={onOpenFeedbackModal}
-              className="h-9 gap-1.5 text-xs bg-primary text-primary-foreground shadow-sm"
+              className="h-9 gap-1.5 text-xs bg-gradient-to-r from-primary to-cyan-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(108,71,255,0.4)] hover:opacity-95 transition"
             >
               <MessageSquarePlus className="size-3.5" />
               <span>Log Feedback</span>
@@ -183,24 +183,24 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
       </div>
 
       {/* Google Sheet Live Data Table */}
-      <div className="rounded-xl border border-border/80 bg-card overflow-hidden shadow-panel">
-        <div className="border-b border-border/80 bg-secondary/30 px-5 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="flex size-7 items-center justify-center rounded-md bg-primary/10 text-primary">
+      <div className="rounded-2xl border border-white/15 bg-black/70 overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.75)] backdrop-blur-2xl">
+        <div className="border-b border-white/10 bg-white/[0.04] px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex size-8 items-center justify-center rounded-xl bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 shadow-[0_0_12px_rgba(0,229,255,0.2)]">
               <TableProperties className="size-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-foreground">
-                Onboarded User & Feedback Data Grid
+              <h3 className="text-sm font-bold text-white">
+                Onboarded User &amp; Feedback Data Grid
               </h3>
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[11px] text-slate-300 font-medium">
                 Showing {filteredUsers.length} of {users.length} verified participant records
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-[10px] font-mono border-primary/30 text-primary bg-primary/5">
+            <Badge variant="outline" className="text-[11px] font-mono border-cyan-400/40 text-cyan-300 bg-cyan-950/50 px-2.5 py-0.5 shadow-[0_0_10px_rgba(0,229,255,0.15)]">
               Live Synchronized
             </Badge>
           </div>
@@ -208,35 +208,35 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
 
         <div className="overflow-x-auto max-h-[480px] overflow-y-auto">
           <Table>
-            <TableHeader className="bg-secondary/40 sticky top-0 z-10 backdrop-blur-md">
-              <TableRow className="border-border">
-                <TableHead className="w-[160px] text-xs font-semibold text-foreground">Name</TableHead>
-                <TableHead className="w-[180px] text-xs font-semibold text-foreground">Email</TableHead>
-                <TableHead className="w-[200px] text-xs font-semibold text-foreground">Wallet Address</TableHead>
-                <TableHead className="min-w-[240px] text-xs font-semibold text-foreground">User Feedback</TableHead>
-                <TableHead className="w-[160px] text-xs font-semibold text-foreground">Tx Hash</TableHead>
-                <TableHead className="w-[140px] text-xs font-semibold text-foreground">Timestamp</TableHead>
-                <TableHead className="w-[100px] text-xs font-semibold text-foreground text-center">Status</TableHead>
+            <TableHeader className="bg-black/80 sticky top-0 z-10 backdrop-blur-md border-b border-white/10">
+              <TableRow className="border-white/10">
+                <TableHead className="w-[160px] text-xs font-bold text-slate-200">Name</TableHead>
+                <TableHead className="w-[180px] text-xs font-bold text-slate-200">Email</TableHead>
+                <TableHead className="w-[200px] text-xs font-bold text-slate-200">Wallet Address</TableHead>
+                <TableHead className="min-w-[240px] text-xs font-bold text-slate-200">User Feedback</TableHead>
+                <TableHead className="w-[160px] text-xs font-bold text-slate-200">Tx Hash</TableHead>
+                <TableHead className="w-[140px] text-xs font-bold text-slate-200">Timestamp</TableHead>
+                <TableHead className="w-[100px] text-xs font-bold text-slate-200 text-center">Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-10 text-xs text-muted-foreground">
+                  <TableCell colSpan={7} className="text-center py-10 text-xs text-slate-400 font-medium">
                     No matching records found. Try modifying your search query.
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredUsers.map((u, i) => (
-                  <TableRow key={i} className="border-border/60 hover:bg-secondary/30 transition-colors">
-                    <TableCell className="font-medium text-xs text-foreground">{u.name}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground font-mono">{u.email}</TableCell>
+                  <TableRow key={i} className="border-white/5 hover:bg-white/[0.05] transition-colors">
+                    <TableCell className="font-semibold text-xs text-white">{u.name}</TableCell>
+                    <TableCell className="text-xs text-slate-300 font-mono">{u.email}</TableCell>
                     <TableCell className="font-mono text-xs">
-                      <span title={u.walletAddress} className="text-muted-foreground hover:text-foreground transition cursor-pointer">
+                      <span title={u.walletAddress} className="text-slate-300 hover:text-cyan-300 transition cursor-pointer">
                         {shorten(u.walletAddress, 10, 6)}
                       </span>
                     </TableCell>
-                    <TableCell className="text-xs text-muted-foreground max-w-xs truncate" title={u.feedback}>
+                    <TableCell className="text-xs text-slate-200 max-w-xs truncate" title={u.feedback}>
                       "{u.feedback}"
                     </TableCell>
                     <TableCell className="font-mono text-xs">
@@ -244,17 +244,17 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
                         href={`https://midnightexplorer.com/transactions/${u.txHash}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-primary hover:underline inline-flex items-center gap-1"
+                        className="text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 font-medium"
                         title={u.txHash}
                       >
                         <span>{shorten(u.txHash, 8, 6)}</span>
-                        <ExternalLink className="size-2.5 opacity-70" />
+                        <ExternalLink className="size-2.5 opacity-80" />
                       </a>
                     </TableCell>
-                    <TableCell className="text-[11px] text-muted-foreground whitespace-nowrap">{u.timestamp}</TableCell>
+                    <TableCell className="text-[11px] text-slate-300 whitespace-nowrap font-mono">{u.timestamp}</TableCell>
                     <TableCell className="text-center">
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20">
-                        <ShieldCheck className="size-3" /> {u.status}
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 shadow-[0_0_10px_rgba(0,229,255,0.15)]">
+                        <ShieldCheck className="size-3 text-cyan-400" /> {u.status}
                       </span>
                     </TableCell>
                   </TableRow>
@@ -265,15 +265,15 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
         </div>
 
         {/* Footer info */}
-        <div className="border-t border-border/80 bg-secondary/20 p-3 px-5 flex flex-wrap items-center justify-between text-xs text-muted-foreground">
+        <div className="border-t border-white/10 bg-white/[0.02] p-3.5 px-6 flex flex-wrap items-center justify-between text-xs text-slate-300">
           <span>
-            CSV export schema: <code className="font-mono text-[11px] text-foreground">Name, Email, Feedback</code>
+            CSV export schema: <code className="font-mono text-[11px] text-cyan-300 bg-black/40 px-2 py-0.5 rounded border border-white/10">Name, Email, Feedback</code>
           </span>
           <a
             href="https://github.com/missingmoonlight/veilpass/blob/main/onboarded_users.csv"
             target="_blank"
             rel="noreferrer"
-            className="text-primary hover:underline inline-flex items-center gap-1 font-medium"
+            className="text-cyan-400 hover:text-cyan-300 hover:underline inline-flex items-center gap-1 font-semibold"
           >
             <span>View Raw CSV on GitHub</span>
             <ExternalLink className="size-3" />
