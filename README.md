@@ -5,13 +5,13 @@
 [![CI](https://github.com/missingmoonlight/veilpass/actions/workflows/ci.yml/badge.svg)](https://github.com/missingmoonlight/veilpass/actions/workflows/ci.yml)
 [![Built with Midnight](https://img.shields.io/badge/Built%20with-Midnight%20Network-6C47FF?style=flat)](https://midnight.network)
 [![X Profile](https://img.shields.io/badge/X-@VeilPass__web3-black?logo=x)](https://x.com/VeilPass_web3)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Feedback Form](https://img.shields.io/badge/Google%20Form-Submit%20Feedback-purple)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)
 [![Google Sheets Registry](https://img.shields.io/badge/Google%20Sheets-User%20Registry%20(70%2B)-success)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
 [![Launch Status](https://img.shields.io/badge/Launch%20Status-Preprod%20Live-blue)](https://veilpass-omega.vercel.app/)
 
 **Prove you meet an age threshold. Keep your birth year private.**
 
-[Live Demo](https://veilpass-omega.vercel.app/) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Google Sheets Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing) · [CSV User Export](./onboarded_users.csv) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [X Strategy & Posts](./docs/X_PRODUCT_POSTS.md) · [X / Twitter](https://x.com/VeilPass_web3)
+[Live Demo](https://veilpass-omega.vercel.app/) · [Submit Feedback (Google Form)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor) · [Google Sheets Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing) · [CSV User Export](./onboarded_users.csv) · [Demo Video (`livedemo.mp4`)](./livedemo.mp4) · [Usage Guide](./docs/USAGE.md) · [Feedback Report](./docs/FEEDBACK.md) · [X / Twitter](https://x.com/VeilPass_web3)
 
 </div>
 
@@ -65,11 +65,12 @@ Terminal output verifying successful `AgeGate.compact` compilation and generated
 
 ## 📊 Onboarded User Details & Validation (Maintained in Google Sheets)
 
-Per Level 5 & Level 6 reviewer guidelines, all individual onboarded user records are maintained in an external **Google Sheet** rather than raw markdown tables in the repository:
+Per Level 5 & Level 6 reviewer guidelines, all individual onboarded user records are maintained in an external **Google Sheet** and collected via our official **Google Form**:
 
-🔗 **[Open VeilPass Onboarded User & Feedback Registry (Google Sheets)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)**
-
-📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Wallet address`, `Feedback`, `Transaction hash`, `Timestamp`, `Method`, `Status`)
+- 📝 **Submit Tester Feedback (Google Form)**: [VeilPass Participant Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)
+- 🔗 **Google Sheet Live Registry**: [Open VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+- 📁 **Offline CSV Export**: [`onboarded_users.csv`](./onboarded_users.csv) (Includes: `Name`, `Email`, `Wallet address`, `Feedback`, `Transaction hash`, `Timestamp`, `Method`, `Status`)
+- 🌐 **In-dApp Interactive Viewer**: Available directly on the [VeilPass Web App](https://veilpass-omega.vercel.app/) under tab *"User Registry & Sheets"*.
 
 ### Cohort Summary Metrics
 

@@ -8,11 +8,13 @@
 
 ---
 
-## 📊 Live Google Sheet Registry
+## 📊 Live Google Sheet & Form Registry
 
-In accordance with reviewer guidelines, the individual user details (including **Name**, **Email**, **Wallet Address**, **Feedback**, and **Transaction Hash**) are maintained in the official Google Sheet:
+In accordance with reviewer guidelines, the individual user details (including **Name**, **Email**, **Wallet Address**, **Feedback**, and **Transaction Hash**) are collected via our Google Form and maintained in the official Google Sheet:
 
-🔗 **[Open VeilPass Onboarded User & Feedback Registry (Google Sheets)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)**
+- 📝 **[VeilPass Participant Feedback Form (Google Forms)](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor)**
+- 🔗 **[Open VeilPass Onboarded User & Feedback Registry (Google Sheets)](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)**
+- 🌐 **[In-dApp Interactive Registry Viewer](https://veilpass-omega.vercel.app/)** (Tab *"User Registry & Sheets"*)
 
 *(Local CSV export for offline review/import is available at [`onboarded_users.csv`](./onboarded_users.csv) and [`docs/onboarded_users.csv`](./docs/onboarded_users.csv))*
 

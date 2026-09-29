@@ -143,7 +143,7 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
           </div>
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end flex-wrap">
           <Button
             variant="outline"
             size="sm"
@@ -153,6 +153,16 @@ export function GoogleSheetViewer({ onOpenFeedbackModal }: GoogleSheetViewerProp
             <Download className="size-3.5 text-primary" />
             <span>Export CSV</span>
           </Button>
+
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md text-xs font-medium border border-border bg-card text-muted-foreground hover:text-primary transition"
+          >
+            <ExternalLink className="size-3.5 text-primary" />
+            <span>Google Form</span>
+          </a>
 
           {onOpenFeedbackModal && (
             <Button

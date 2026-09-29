@@ -13,6 +13,16 @@ This document records the user feedback, developer testing insights, and iterati
 
 ---
 
+## 📝 Participant Feedback & Intake Channels
+
+Participants and testnet reviewers can submit qualitative reviews, issue reports, and verification logs through multiple channels:
+
+1. 📝 **Official Google Form**: [VeilPass Participant Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor) (Primary intake form)
+2. 🔗 **Live Google Sheet Registry**: [VeilPass Onboarded User & Feedback Registry](https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing)
+3. 🌐 **In-dApp Interactive Table**: Directly in the web app under tab *"User Registry & Sheets"* with 1-click CSV export.
+
+---
+
 ## 🔄 What We Heard vs. What We Changed Matrix
 
 The following feedback matrix tracks real user & tester inputs directly to concrete code modifications, impacted components, and git commit hashes:

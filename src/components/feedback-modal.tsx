@@ -154,15 +154,27 @@ export function FeedbackModal({
             </div>
 
             <div className="flex items-center justify-between pt-2">
-              <a
-                href="https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-primary transition"
-              >
-                <span>View Google Sheet</span>
-                <ExternalLink className="size-3" />
-              </a>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdeUDt58Pqtip61REa5lFxiln93rSuSXTgNC8FpiZi1d9sm9w/viewform?usp=publish-editor"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] text-primary hover:underline font-medium"
+                >
+                  <span>Open Google Form</span>
+                  <ExternalLink className="size-3" />
+                </a>
+                <span className="text-border text-xs">|</span>
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1VeilPass-Midnight-Preprod-ZK-Validation-Registry/edit?usp=sharing"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition"
+                >
+                  <span>Sheet</span>
+                  <ExternalLink className="size-3" />
+                </a>
+              </div>
 
               <Button type="submit" size="sm" className="gap-1.5 h-9 text-xs">
                 <Send className="size-3.5" /> Submit Feedback
